@@ -22,19 +22,19 @@ size_t	ft_strlen(char *str)
 	return (ret);
 }
 
-static int	puts(int fd, char *str)
+int		ft_putstr(int fd, char *str)
 {
 	return (write(fd, str, ft_strlen(str)));
 }
 
-int	o_puts(char *str)
+int		o_puts(char *str)
 {
-	return (puts(STDOUT_FILENO, str));
+	return (ft_putstr(STDOUT_FILENO, str));
 }
 
 int	e_puts(char *str)
 {
-	return (puts(STDERR_FILENO, str));
+	return (ft_putstr(STDERR_FILENO, str));
 }
 
 int	ft_atoi(const char *str)

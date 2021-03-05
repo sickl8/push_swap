@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_tools_0.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:59:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 17:02:43 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/06 00:51:38 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_stack(t_stk *stack)
 	stack->anchor = NULL;
 	stack->list = NULL;
 	stack->length = 0;
-	return (0);
+	return (1);
 }
 
 int	init_stack_iterator(t_stki *itr, t_stk *stack)
@@ -48,9 +48,7 @@ int stack_iterator_advance(t_stki *itr)
 t_clt	*stack_member(int needle, t_stk *stack)
 {
 	t_stki	itr;
-	int		i;
 
-	i = 0;
 	init_stack_iterator(&itr, stack);
 	while (!stack_iterator_end(&itr))
 	{

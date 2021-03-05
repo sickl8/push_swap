@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_def.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:27:44 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 17:11:20 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/06 00:47:09 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@
 # define RRA 8
 # define RRB 9
 # define RRR 10
+
+#define PV(x, y) printf("%s = " y, #x, x)
+#define HERE printf("here?: %s:%d\n", __FILE__, __LINE__)
 
 #endif

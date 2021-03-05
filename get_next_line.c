@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 21:20:58 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/04 19:23:34 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/06 00:03:49 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		get_next_line(char **line)
 	if ((rd_ret = read(STDIN_FILENO, ret, BUFFER_SIZE)) < 0)
 		return (err(ret, NULL, NULL));
 	ret[rd_ret] = '\0';
-	while (rd_ret == BUFFER_SIZE)
+	while (rd_ret == BUFFER_SIZE && !ft_strchr(ret, '\n'))
 	{
 		if (!(join = wrap_malloc(BUFFER_SIZE + 1)))
 			return (err(ret, NULL, NULL));

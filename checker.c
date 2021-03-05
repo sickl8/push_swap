@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:24:14 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 18:57:44 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/06 00:51:30 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-#define PV(x, y) printf("%s = " y, #x, x)
 
 void	exec(t_list *list, t_stk *a_stack, t_stk *b_stack)
 {
@@ -28,6 +26,7 @@ void	exec(t_list *list, t_stk *a_stack, t_stk *b_stack)
 	#endif
 	while (itr)
 	{
+		// printf("list = |%s|\n", (char*)itr->data);
 		if (!ft_strcmp(itr->data, "sa") || !ft_strcmp(itr->data, "ss"))
 			stack_swap(a_stack);
 		if (!ft_strcmp(itr->data, "sb") || !ft_strcmp(itr->data, "ss"))
@@ -59,11 +58,6 @@ void	exec(t_list *list, t_stk *a_stack, t_stk *b_stack)
 
 int		check_line_sanity(char *s)
 {
-	char	*tmp;
-
-	tmp = ft_strchr(s, '\n');
-	if (tmp && tmp[1] == '\0')
-		*tmp = '\0';
 	if (!ft_strcmp(s, "sa") || !ft_strcmp(s, "sb")
 		|| !ft_strcmp(s, "ss") || !ft_strcmp(s, "pa") || !ft_strcmp(s, "pb")
 		|| !ft_strcmp(s, "ra") || !ft_strcmp(s, "rb") || !ft_strcmp(s, "rr")
@@ -72,28 +66,50 @@ int		check_line_sanity(char *s)
 	return (1);
 }
 
+t_list	*make_list(char *s)
+{
+	char	*tmp;
+	t_list	*list;
+	char	*orig;
+
+	orig = s;
+	list = NULL;
+	while (*s)
+	{
+		tmp = s;
+		tmp = ft_strchr(tmp, '\n');
+		if (!tmp)
+			error();
+		*tmp = '\0';
+		if (check_line_sanity(s))
+			error();
+		add_node(ft_strdup(s), &list);
+		s = tmp + 1;
+	}
+	free(orig);
+	return (list);
+}
+
 void	continue_main(t_stk *a_stack, t_stk *b_stack)
 {
 	int		gret;
 	char	*line;
-	t_list	*list;
+	char	*buf;
+	char	*tmp;
 
 	gret = 1;
-	list = NULL;
+	buf = ft_strdup("");
 	while (gret > 0)
 	{
 		gret = get_next_line(&line);
-		if (!ft_strcmp(line, ""))
-		{
-			free(line);
-			break ;
-		}
-		if (gret != -1 && !check_line_sanity(line))
-			add_node(line, &list);
-		else
-			error();
+		tmp = buf;
+		buf = ft_strjoin(buf, line);
+		free(tmp);
+		free(line);
 	}
-	exec(list, a_stack, b_stack);
+	if (gret == -1)
+		error();
+	exec(make_list(buf), a_stack, b_stack);
 }
 
 int		main(int ac, char **av)
@@ -102,7 +118,7 @@ int		main(int ac, char **av)
 	t_stk	b_stack;
 	int		i;
 
-	init_stack(&a_stack) && init_stack(&b_stack);
+	(void)(init_stack(&a_stack) && init_stack(&b_stack));
 	if (ac == 1)
 		return (0);
 	i = 0;

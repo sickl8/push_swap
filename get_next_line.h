@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:38:23 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/04 19:23:13 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/06 00:00:45 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ char			*fs(const char *str, int x);
 char			*ft_strdup(const char *s1);
 size_t			ft_strlen(const char *s);
 void			*wrap_malloc(size_t bytes);
+char			*ft_strchr(const char *s, int c);
 
 #endif

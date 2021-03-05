@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:11:02 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/04 18:59:54 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/06 00:23:54 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_strdup(const char *s1)
 		return ((char*)s1);
 	while (s1[i])
 		i++;
-	rtn = malloc(i + 1);
+	rtn = wrap_malloc(i + 1);
 	if (rtn == NULL)
 		return (NULL);
 	while (i >= 0)
@@ -102,7 +102,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = -1;
 	j = ft_strlen(s1);
 	k = ft_strlen(s2);
-	tmp = (char*)malloc(sizeof(char) * (j + k + 1));
+	tmp = (char*)wrap_malloc(sizeof(char) * (j + k + 1));
 	if (tmp == NULL || (char*)s2 == NULL)
 		return (NULL);
 	while (++i < j)
