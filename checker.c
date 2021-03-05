@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:24:14 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 17:26:36 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/05 18:57:44 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	exec(t_list *list, t_stk *a_stack, t_stk *b_stack)
 
 	itr = list;
 	#ifdef DEBUG
-	// o_puts("\033[2J;");
 	o_puts("\n");
 	double_stack_print(a_stack, b_stack);
 	o_puts("- -\n");
