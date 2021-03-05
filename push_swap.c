@@ -6,23 +6,15 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 19:00:36 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/05 19:04:51 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	print_instructions(t_list *instructions)
+int		choose_correct_anchor(int anchor)
 {
-	char **cor;
 	
-	cor = (char*[]){"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
-	while (instructions)
-	{
-		o_puts(cor[(int)instructions->data]);
-		o_puts("\n");
-		instructions = instructions->next;
-	}
 }
 
 void	continue_main(t_stk *a_stack, t_stk *b_stack)
@@ -32,15 +24,8 @@ void	continue_main(t_stk *a_stack, t_stk *b_stack)
 	t_list	*instructions;
 
 	(void)b_stack;
-	anchor = INT_MAX;
 	instructions = NULL;
-	init_stack_iterator(&itr, a_stack);
-	while (!stack_iterator_end(&itr))
-	{
-		if (itr.ptr->data < anchor)
-			anchor = itr.ptr->data;
-		stack_iterator_advance(&itr);
-	}
+	anchor = choose_correct_anchor(INT_MAX);
 	if (a_stack->length / 2 < stack_member_index(anchor, a_stack))
 		while (a_stack->anchor->data != anchor)
 		{

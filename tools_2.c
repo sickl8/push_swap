@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 19:26:32 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 17:23:09 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/05 19:03:00 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,18 @@ int		check_sanity(char *s)
 		if (!ft_isdigit(s[i]))
 			return (1);
 	return (0);
+}
+
+void	print_instructions(t_list *instructions)
+{
+	char **cor;
+	
+	cor = (char*[])
+	{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
+	while (instructions)
+	{
+		o_puts(cor[(int)instructions->data]);
+		o_puts("\n");
+		instructions = instructions->next;
+	}
 }

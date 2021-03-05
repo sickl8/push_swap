@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 17:23:21 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/05 19:03:34 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	stack_push_from_a_to_b(t_stk *a, t_stk *b);
 void	stack_push_from_b_to_a(t_stk *a, t_stk *b);
 int		stack_member_index_p(t_clt *member, t_stk *stack);
 int		stack_member_index(int data, t_stk *stack);
+void	print_instructions(t_list *instructions);
 
 #endif
