@@ -42,7 +42,7 @@ fclean: clean
 
 re: fclean all
 
-san:
+san:1
 	gcc $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g -fsanitize=address
 	gcc $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g -fsanitize=address
 
