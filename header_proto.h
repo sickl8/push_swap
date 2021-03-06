@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_proto.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/06 00:07:38 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/06 18:13:41 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	ft_putnbr(int n);
 char	*ft_strchr(const char *s, int c);
 int		ft_strcmp(char *s1, char *s2);
 void	ft_memset(char *s, char c, size_t len);
-void	*wrap_malloc(size_t bytes);
 size_t	ft_strlen(const char *str);
 int		ft_atoi(const char *str);
+long	ft_abs(long x);
+void	*wrap_malloc(size_t bytes);
 int		check_sanity(char *s);
 int		o_puts(char *str);
 int		e_puts(char *str);
@@ -51,8 +52,10 @@ void	stack_push_from_b_to_a(t_stk *a, t_stk *b);
 int		stack_member_index_p(t_clt *member, t_stk *stack);
 int		stack_member_index(int data, t_stk *stack);
 void	stack_reach_member(int member, t_stk *stack, t_list **instructions);
+t_stk	*stack_duplicate(t_stk *stack);
 void	print_instructions(t_list *instructions);
 void	print_instructions_s(t_list *instructions);
 int		smallest_member(t_stk *stack);
+int		list_len(t_list *list);
 
 #endif

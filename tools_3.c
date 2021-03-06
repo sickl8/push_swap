@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 22:18:30 by sickl8            #+#    #+#             */
-/*   Updated: 2021/03/06 00:07:25 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/06 16:51:41 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,17 @@ void	ft_memset(char *s, char c, size_t len)
 	i = 0;
 	while (i < len)
 		s[i++] = c;
+}
+
+size_t	list_len(t_list *list)
+{
+	int		ret;
+
+	ret = 0;
+	while (list)
+	{
+		ret++;
+		list = list->next;
+	}
+	return (ret);
 }

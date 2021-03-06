@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_tools_4.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:43:48 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 23:22:21 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/06 17:09:52 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,21 @@ int		stack_member_index(int data, t_stk *stack)
 		stack_iterator_advance(&itr);
 	}
 	return (-1);
+}
+
+t_stk	*stack_duplicate(t_stk *stack)
+{
+	int		i;
+	t_stk	*ret;
+	t_stki	itr;
+
+	ret = wrap_malloc(sizeof(*ret));
+	init_stack(ret);
+	init_stack_iterator(&itr, stack);
+	while (!stack_iterator_end(&itr))
+	{
+		stack_push_front(itr.ptr->data, ret);
+		stack_iterator_advance(&itr);
+	}
+	return (ret);
 }

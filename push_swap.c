@@ -3,16 +3,124 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 23:54:19 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/06 19:41:21 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	continue_main(t_stk *a_stack, t_stk *b_stack)
+void	inc_tab(int *tab, int base, size_t len)
+{
+	size_t	i;
+
+	i = len - 1;
+	while (tab[i] == base - 1)
+		i--;
+	if (i < len)
+		tab[i]++;
+}
+
+int		end_tab(int *tab, int base, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len && tab[i] == base - 1)
+		i++;
+	return ((tab[i] == base - 1));
+}
+
+int		mo7aramat(int a, int b)
+{
+	if (b != -1 && (((a <= SA && a <= SS) && b == a) ||
+	(a + b == PB + PA && (a == PB || a == PA)) ||
+	((a == RA || a == RR) && (b == RRA || b == RRR)) ||
+	((a == RRA || a == RRR) && (b == RA || b == RR)) ||
+	((a == RB || a == RR) && (b == RRB || b == RRR)) ||
+	((a == RRB || a == RRR) && (b == RB || b == RR))))
+		return (1);
+	return (0);
+}
+
+int		illegal_swap(int pa, int pb, int inst)
+{
+	if (inst == )
+}
+
+int		evaluate_tab(int *tab, size_t len, size_t stack_len)
+{
+	size_t	i;
+	int		pusha;
+	int		pushb;
+
+	pusha = 0;
+	pushb = 0;
+	i = 0;
+	while (i < len)
+	{
+		if (mo7aramat(tab[i], i == len - 1 ? tab[i + 1] : -1))
+			return (1);
+		if (tab[i] == PA)
+			pusha++;
+		else if (tab[i] == PB)
+			pusha++;
+		if (ft_abs(pushb - pusha) > stack_len ||
+		(tab[i] < PA && illegal_swap(pusha, pushb, tab[i])))
+			return (1);
+		i++;
+	}
+	if (pusha != pushb)
+		return (1);
+	return (0);
+}
+
+int		brute_force_pool(size_t len, t_stk *a_stack, t_list **inst)
+{
+	int		*tab;
+	int		*cmp_tab;
+	t_stk	b_stack;
+	int		i;
+
+	init_stack(&b_stack);
+	tab = wrap_malloc(sizeof(*tab) * len);
+	ft_memset(tab, 0, sizeof(*tab) * len);
+	i = -1;
+	while (++i < len)
+		cmp_tab[i] = RRR;
+	while (!end_tab(tab, 11, len))
+	{
+		while (evaluate_tab(tab, len, a_stack->length) && !end_tab(tab, 11, len))
+			inc_tab(tab, 11, len);
+		apply_instructions(tab, len, a_stack, &b_stack);
+		if (stack_is_sorted(a_stack) && stack_size(&b_stack) == 0)
+		{
+			*inst = export_instructions(tab, len);
+			return (1);
+		}
+	}
+	return (0);
+}
+
+void	brute_force(t_list *inst, t_stk *a_stack, t_stk *b_stack)
+{
+	size_t	max_len;
+	size_t	i;
+
+	max_len = list_len(inst);
+	i = 1;
+	while (i < max_len)
+	{
+		if (brute_force_pool(i, stack_duplicate(a_stack), &inst))
+			break ;
+		i++;
+	}
+	print_instructions(inst);
+}
+
+void	continue_main_0(t_stk *a_stack, t_stk *b_stack)
 {
 	int		smallest;
 	t_list	*instructions;
@@ -31,7 +139,7 @@ void	continue_main(t_stk *a_stack, t_stk *b_stack)
 		stack_push_from_b_to_a(a_stack, b_stack);
 		add_node((void*)PA, &instructions);
 	}
-	print_instructions(instructions);
+	brute_force(instructions, a_stack, b_stack);
 }
 
 int		main(int ac, char **av)
@@ -52,6 +160,6 @@ int		main(int ac, char **av)
 	}
 	if (ac == 2)
 		return (0);
-	continue_main(&a_stack, &b_stack);
+	continue_main_0(&a_stack, &b_stack);
 	return (0);
 }
