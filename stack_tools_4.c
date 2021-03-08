@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_tools_4.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:43:48 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/06 17:09:52 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/08 02:11:12 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int		stack_member_index(int data, t_stk *stack)
 
 t_stk	*stack_duplicate(t_stk *stack)
 {
-	int		i;
 	t_stk	*ret;
 	t_stki	itr;
 

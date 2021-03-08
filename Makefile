@@ -21,7 +21,8 @@ stack_tools_4.c \
 tools_0.c \
 tools_1.c \
 tools_2.c \
-tools_3.c 
+tools_3.c \
+tools_4.c 
 
 NAME = name
 CHECKER = checker

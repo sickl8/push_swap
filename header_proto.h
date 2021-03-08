@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_proto.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/06 18:13:41 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/08 02:11:31 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ t_stk	*stack_duplicate(t_stk *stack);
 void	print_instructions(t_list *instructions);
 void	print_instructions_s(t_list *instructions);
 int		smallest_member(t_stk *stack);
-int		list_len(t_list *list);
+size_t	list_len(t_list *list);
 
 #endif
