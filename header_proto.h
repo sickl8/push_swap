@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_proto.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/08 02:11:31 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/08 16:27:10 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	print_instructions(t_list *instructions);
 void	print_instructions_s(t_list *instructions);
 int		smallest_member(t_stk *stack);
 size_t	list_len(t_list *list);
+int		evaluate_tab(int *tab, size_t len, size_t stack_len);
 
 #endif

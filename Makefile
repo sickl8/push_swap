@@ -34,15 +34,15 @@ all: $(NAME)
 $(NAME): $(CHECKER) $(PUSH_SWAP)
 
 $(CHECKER):
-	gcc $(WWW) $(CHECKER_SRC) -o $(CHECKER)
+	gcc $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g
 
 $(PUSH_SWAP):
-	gcc $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP)
+	gcc $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g
 
 clean:
-
+	rm -rf a.out *dSYM
 fclean: clean
-	rm -rf $(CHECKER) $(PUSH_SWAP) a.out *dSYM
+	rm -rf $(CHECKER) $(PUSH_SWAP)
 
 re: fclean all
 
