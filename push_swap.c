@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/08 19:29:26 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/09 02:09:53 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,18 @@ int		mo7aramat(int a, int b)
 	return (0);
 }
 
-int		illegal_rotate(int pa, int pb, int inst, int stack_len)
+int		illegal_rotation(int alen, int blen, int inst)
 {
-	if ((inst != RB && inst != RRB && stack_len - pb + pa < 2) ||
-		(inst != RA && inst != RRA && pb - pa < 2))
+	if ((inst != RB && inst != RRB && alen < 2) ||
+		(inst != RA && inst != RRA && blen < 2))
 		return (1);
 	return (0);
 }
 
-int		illegal_swap(int pa, int pb, int inst, int stack_len)
+int		illegal_swap(int alen, int blen, int inst)
 {
-	if (((inst == SA || inst == SS) && stack_len - pb + pa < 2) ||
-		((inst == SB || inst == SS) && pb - pa < 2))
+	if ((inst != SB && alen < 2) ||
+		(inst != SA && blen < 2))
 		return (1);
 	return (0);
 }
@@ -117,7 +117,7 @@ int		evaluate_tab(int *tab, size_t len, size_t stack_len)
 			// printf("mo7ramat 2\n");
 			return 1;
 		}
-		else if (tab[i] < PA && illegal_swap(pusha, pushb, tab[i], stack_len))
+		else if (tab[i] < PA && illegal_swap(pusha, pushb, tab[i]/*, stack_len*/))
 		{
 			// for (size_t asd = 0; asd < len; asd++)
 			// 	printf("[%s]", g_cor[tab[asd]]);
@@ -143,21 +143,49 @@ int		evaluate_tab(int *tab, size_t len, size_t stack_len)
 	return (0);
 }
 
-void	generate_tab(int *tab, size_t len, int a_stklen)
+int		legal_move(int a, int move, int *slen, int mxlen)
+{
+	if (a != -1 && mo7aramat(a, move))
+		return (0);
+	if ((move == PA && slen[B] == 0) || (move == PB && slen[A] == 0))
+		return (0);
+	else if (move < PA && illegal_swap(slen[A], slen[B], move))
+		return (0);
+	else if (move > PB && illegal_rotation(slen[A], slen[B], move))
+		return (0);
+	return (1);
+}
+
+void	generate_tab(int *tab, size_t len, int members)
 {
 	size_t	i;
 	int		chosen;
-	int		b_stklen;
+	int		slen[2];
 
 	i = 0;
-	b_stklen = 0;
+	slen[A] = members;
+	slen[B] = 0;
 	while (i < len)
 	{
 		chosen = tab[i] + 1;
 		while (chosen < RRR + 1)
 		{
-			
+			if (legal_move(i ? tab[i - 1] : -1, chosen, slen, members))
+			{
+				tab[i] = chosen;
+				break ;
+			}
 			chosen++;
+		}
+		if (chosen == PA)
+		{
+			slen[A]++;
+			slen[B]--;
+		}
+		else if (chosen == PB)
+		{
+			slen[A]--;
+			slen[B]++;
 		}
 		if (chosen == RRR + 1)
 			i--;
