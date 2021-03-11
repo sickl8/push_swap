@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/10 15:35:09 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/11 04:09:30 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,13 @@ void	generate_tab(int *tab, size_t len, int members)
 		while (++chosen < RRR + 1)
 		{
 			tab[i] = chosen;
-			if (legal_move(i ? tab[i - 1] : -1, chosen, slen, members))
+			if ((int)(len - i) <= members - slen[A])
+			{
+				tab[i] = PA;
+				chosen = PA;
+				break ;
+			}
+			else if (legal_move(i ? tab[i - 1] : -1, chosen, slen, members) && !((i + 1 == len || i + 2 == len)&& chosen == PB))
 				break ;
 		}
 		if (chosen == PA)
@@ -182,9 +188,21 @@ void	generate_tab(int *tab, size_t len, int members)
 		else if (chosen == PB)
 			(void)(1 + 0 * (slen[A]--) && 1 + 0 * (slen[B]++));
 	}
-	i = len - 1;
-	while (slen[A]-- != members)
-		tab[i--] = PA;
+	int p = 0;
+	i = 0;
+	while (i < len)
+	{
+		if (tab[i] == PA)
+	 		p++;
+		else if (tab[i] == PB)
+			p--;
+		i++;
+	}
+	if (p == 0)
+		printf("success!\n");
+	// i = len - 1;
+	// while (slen[A]-- != members)
+	// 	tab[i--] = PA;
 }
 
 int		brute_force_pool(size_t len, t_stk *a_stack, t_list **inst)
@@ -212,12 +230,12 @@ int		brute_force_pool(size_t len, t_stk *a_stack, t_list **inst)
 		for (size_t asd = 0; asd < len; asd++)
 			printf("[%s]", g_cor[tab[asd]]);
 		printf("\n");
-		size_t count = 0;
+		// size_t count = 0;
 		// while (!inc_tab(tab, len))
 		// {
 		// 	count++;
 		// }
-		printf("count = %zu\n", count);
+		// printf("count = %zu\n", count);
 		len++;
 	}
 	// tab[len - 1] = -1;
