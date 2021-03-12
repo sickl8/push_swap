@@ -6,7 +6,7 @@
 /*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/11 04:09:30 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/12 02:16:02 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,26 @@ int		legal_move(int a, int move, int *slen, int mxlen)
 	return (1);
 }
 
+int		inc_tab(int *tab, size_t len)
+{
+	int		i;
+	int		chosen;
+
+	i = len - 1;
+	chosen = tab[i] + 1;
+	while (i > -1 && i < len)
+	{
+		if (chosen > RRR)
+		{
+			i--;
+			continue ;
+		}
+		if (legal_move())
+		i++;
+	}
+	return (0);
+}
+
 void	generate_tab(int *tab, size_t len, int members)
 {
 	size_t	i;
@@ -180,7 +200,8 @@ void	generate_tab(int *tab, size_t len, int members)
 				chosen = PA;
 				break ;
 			}
-			else if (legal_move(i ? tab[i - 1] : -1, chosen, slen, members) && !((i + 1 == len || i + 2 == len)&& chosen == PB))
+			else if (legal_move(i ? tab[i - 1] : -1, chosen, slen, members) &&
+			!((i + 1 == len || i + 2 == len) && chosen == PB))
 				break ;
 		}
 		if (chosen == PA)
@@ -230,12 +251,12 @@ int		brute_force_pool(size_t len, t_stk *a_stack, t_list **inst)
 		for (size_t asd = 0; asd < len; asd++)
 			printf("[%s]", g_cor[tab[asd]]);
 		printf("\n");
-		// size_t count = 0;
-		// while (!inc_tab(tab, len))
-		// {
-		// 	count++;
-		// }
-		// printf("count = %zu\n", count);
+		size_t count = 0;
+		while (!inc_tab(tab, len))
+		{
+			count++;
+		}
+		printf("count = %zu\n", count);
 		len++;
 	}
 	// tab[len - 1] = -1;
