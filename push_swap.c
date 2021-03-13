@@ -6,7 +6,7 @@
 /*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/12 02:16:02 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/13 01:11:13 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,21 +159,25 @@ int		legal_move(int a, int move, int *slen, int mxlen)
 	return (1);
 }
 
-int		inc_tab(int *tab, size_t len)
+int		inc_tab(int *tab, size_t len, int members)
 {
-	int		i;
+	int		slen[2];
 	int		chosen;
+	int		i;
 
 	i = len - 1;
-	chosen = tab[i] + 1;
-	while (i > -1 && i < len)
+	slen[A] = members;
+	slen[B] = 0;
+	while (i > -1 && i < (int)len)
 	{
+		chosen = tab[i] + 1;
 		if (chosen > RRR)
 		{
 			i--;
 			continue ;
 		}
-		if (legal_move())
+		if (!((i + 1 == len || i + 2 == len) && (chosen == 4 || chosen == 1)) &&
+			legal_move(!i ? -1 : tab[i - 1], chosen, slen, members))
 		i++;
 	}
 	return (0);
@@ -252,7 +256,7 @@ int		brute_force_pool(size_t len, t_stk *a_stack, t_list **inst)
 			printf("[%s]", g_cor[tab[asd]]);
 		printf("\n");
 		size_t count = 0;
-		while (!inc_tab(tab, len))
+		while (!inc_tab(tab, len, a_stack->length))
 		{
 			count++;
 		}
