@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:51:10 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 16:37:00 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/15 19:17:08 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	double_stack_print(t_stk *a_stack, t_stk *b_stack)
 	{
 		if (!stack_iterator_end(&a_itr))
 		{
+			o_puts("      ");
 			ft_putnbr(a_itr.ptr->data);
 			stack_iterator_advance(&a_itr);	
 		}
@@ -61,7 +62,7 @@ void	double_stack_print(t_stk *a_stack, t_stk *b_stack)
 		if (!stack_iterator_end(&b_itr) &&
 		a_itr.stk->length - a_itr.index < b_itr.stk->length)
 		{
-			o_puts(" ");
+			o_puts("\t");
 			ft_putnbr(b_itr.ptr->data);
 			stack_iterator_advance(&b_itr);	
 		}

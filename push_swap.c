@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/13 20:38:20 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/15 19:37:22 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,12 +163,12 @@ int		inc_tab(int *tab, size_t len, int members)
 {
 	int		slen[2];
 	int		chosen;
-	int		i;
+	size_t	i;
 
 	i = len - 1;
 	slen[A] = members;
 	slen[B] = 0;
-	while (i > -1 && i < (int)len)
+	while (i > -1 && i < len)
 	{
 		chosen = tab[i] + 1;
 		if (chosen > RRR)
@@ -305,23 +305,36 @@ void	brute_force(t_list *inst, t_stk *a_stack)
 void	continue_main_0(t_stk *a_stack, t_stk *b_stack)
 {
 	int		smallest;
+	int		biggest;
+	int		reached;
 	t_list	*instructions;
 
-	(void)b_stack;
 	instructions = NULL;
-	while (a_stack->length > 1)
+	while (!stack_is_sorted(a_stack))
 	{
 		smallest = smallest_member(a_stack);
-		stack_reach_member(smallest, a_stack, &instructions);
+		biggest = biggest_member(a_stack);
+		// stack_reach_member(smallest, a_stack, &instructions);
+		reached =
+		stack_reach_closest_member(smallest, biggest, a_stack, &instructions);	
 		stack_push_from_a_to_b(a_stack, b_stack);
 		add_node((void*)PB, &instructions);
+		if (reached == biggest && stack_size(b_stack) > 1)
+		{
+			stack_rotate(b_stack);
+			add_node((void*)RB, &instructions);
+		}
 	}
+	biggest = biggest_member(a_stack);
+	stack_reach_member(biggest, B, b_stack, &instructions);
 	while (b_stack->length)
 	{
+		HERE;
 		stack_push_from_b_to_a(a_stack, b_stack);
 		add_node((void*)PA, &instructions);
 	}
-	brute_force(instructions, a_stack);
+	print_instructions(instructions);
+	// brute_force(instructions, a_stack);
 }
 
 int		main(int ac, char **av)

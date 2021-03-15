@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_tools_4.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:43:48 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/14 22:59:40 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/15 19:24:12 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,40 @@ t_stk	*stack_duplicate(t_stk *stack)
 		stack_iterator_advance(&itr);
 	}
 	return (ret);
+}
+
+int		biggest_member(t_stk *stack)
+{
+	t_stki	itr;
+	int		ret;
+
+	ret = INT_MIN;
+	init_stack_iterator(&itr, stack);
+	while (!stack_iterator_end(&itr))
+	{
+		if (itr.ptr->data > ret)
+			ret = itr.ptr->data;
+		stack_iterator_advance(&itr);
+	}
+	return (ret);
+}
+
+int		stack_reach_closest_member(int m1, int m2, t_stk *stack, t_list **inst)
+{
+	int		len1;
+	int		len2;
+	int		i1;
+	int		i2;
+
+	i1 = stack_member_index(m1, stack);
+	i2 = stack_member_index(m2, stack);
+	len1 = ft_min(i1 - stack->length / 2, i1);
+	len2 = ft_min(i2 - stack->length / 2, i2);
+	if (len1 < len2)
+	{
+		stack_reach_member(m1, A, stack, inst);
+		return (m1);
+	}
+	stack_reach_member(m2, A, stack, inst);
+	return (m2);
 }

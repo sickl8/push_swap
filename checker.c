@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:24:14 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/06 00:51:30 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/15 19:17:28 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	exec(t_list *list, t_stk *a_stack, t_stk *b_stack)
 	#ifdef DEBUG
 	o_puts("\n");
 	double_stack_print(a_stack, b_stack);
-	o_puts("- -\n");
-	o_puts("a b\n");
-	o_puts("-------------------------------\n");
+	o_puts("      - -\n");
+	o_puts("      a b\n");
+	o_puts("      -------------------------------\n");
 	#endif
 	while (itr)
 	{
@@ -32,22 +32,24 @@ void	exec(t_list *list, t_stk *a_stack, t_stk *b_stack)
 		if (!ft_strcmp(itr->data, "sb") || !ft_strcmp(itr->data, "ss"))
 			stack_swap(b_stack);
 		if (!ft_strcmp(itr->data, "ra") || !ft_strcmp(itr->data, "rr"))
-			rotate_stack(a_stack);
+			stack_rotate(a_stack);
 		if (!ft_strcmp(itr->data, "rb") || !ft_strcmp(itr->data, "rr"))
-			rotate_stack(b_stack);
+			stack_rotate(b_stack);
 		if (!ft_strcmp(itr->data, "rra") || !ft_strcmp(itr->data, "rrr"))
-			reverse_rotate_stack(a_stack);
+			stack_reverse_rotate(a_stack);
 		if (!ft_strcmp(itr->data, "rrb") || !ft_strcmp(itr->data, "rrr"))
-			reverse_rotate_stack(b_stack);
+			stack_reverse_rotate(b_stack);
 		else if (!ft_strcmp(itr->data, "pa"))
 			stack_push_from_b_to_a(a_stack, b_stack);
 		else if (!ft_strcmp(itr->data, "pb"))
 			stack_push_from_a_to_b(a_stack, b_stack);
 		#ifdef DEBUG
 		double_stack_print(a_stack, b_stack);
-		o_puts("- -\n");
-		o_puts("a b\n");
-		o_puts("-------------------------------\n");
+		o_puts("      - -\n");
+		o_puts("      a b\n");
+		o_puts("      -------------------------------");
+		o_puts(itr->data);
+		o_puts("\n");
 		#endif
 		itr = itr->next;
 	}

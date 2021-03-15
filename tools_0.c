@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:37:21 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/03 17:17:19 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/15 19:25:30 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		o_puts(char *str)
 	return (ft_putstr(STDOUT_FILENO, str));
 }
 
-int	e_puts(char *str)
+int		e_puts(char *str)
 {
 	return (ft_putstr(STDERR_FILENO, str));
 }

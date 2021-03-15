@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:05:43 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 14:40:18 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/15 18:35:46 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	stack_swap(t_stk *stack)
 	stack->anchor->data = stack->anchor->data ^ stack->anchor->next->data;
 }
 
-void	rotate_stack(t_stk *stack)
+void	stack_rotate(t_stk *stack)
 {
 	if (!stack->anchor)
 		return ;
 	stack->anchor = stack->anchor->next;
 }
 
-void	reverse_rotate_stack(t_stk *stack)
+void	stack_reverse_rotate(t_stk *stack)
 {
 	if (!stack->anchor)
 		return ;

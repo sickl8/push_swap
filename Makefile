@@ -10,7 +10,8 @@ stack_tools_4.c \
 tools_0.c \
 tools_1.c \
 tools_2.c \
-tools_3.c 
+tools_3.c \
+tools_4.c 
 
 PUSH_SWAP_SRC = push_swap.c \
 stack_tools_0.c \

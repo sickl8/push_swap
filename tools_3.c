@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 22:18:30 by sickl8            #+#    #+#             */
-/*   Updated: 2021/03/06 16:51:41 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/15 19:39:09 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,24 @@ void	sort_tab(int *tab, int len)
 	}
 }
 
-void	stack_reach_member(int member, t_stk *stack, t_list **instructions)
+void	stack_reach_member(int member, int stk, t_stk *stack, t_list **inst)
 {
+	if (!stack->anchor)
+		return ;
 	if (stack->length / 2 < stack_member_index(member, stack))
 	{
 		while (stack->anchor->data != member)
 		{
-			reverse_rotate_stack(stack);
-			add_node((void*)RRA, instructions);
+			stack_reverse_rotate(stack);
+			add_node((void*)RRA + stk, inst);
 		}
 	}
 	else
 	{
 		while (stack->anchor->data != member)
 		{
-			rotate_stack(stack);
-			add_node((void*)RA, instructions);
+			stack_rotate(stack);
+			add_node((void*)RA + stk, inst);
 		}
 	}
 }
