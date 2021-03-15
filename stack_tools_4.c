@@ -6,7 +6,7 @@
 /*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:43:48 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/08 02:11:12 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/14 22:59:40 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_stk	*stack_duplicate(t_stk *stack)
 	init_stack_iterator(&itr, stack);
 	while (!stack_iterator_end(&itr))
 	{
-		stack_push_front(itr.ptr->data, ret);
+		stack_push_back(itr.ptr->data, ret);
 		stack_iterator_advance(&itr);
 	}
 	return (ret);

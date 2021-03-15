@@ -6,7 +6,7 @@
 /*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/13 01:11:13 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/13 20:38:20 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,8 +176,10 @@ int		inc_tab(int *tab, size_t len, int members)
 			i--;
 			continue ;
 		}
-		if (!((i + 1 == len || i + 2 == len) && (chosen == 4 || chosen == 1)) &&
+		if (chosen != PA && chosen != PB &&
+			!((i + 1 == len || i + 2 == len) && (chosen == SB)) &&
 			legal_move(!i ? -1 : tab[i - 1], chosen, slen, members))
+			break ;
 		i++;
 	}
 	return (0);

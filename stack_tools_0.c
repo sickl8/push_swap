@@ -6,7 +6,7 @@
 /*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:59:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/06 00:51:38 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/14 23:17:49 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	init_stack(t_stk *stack)
 	return (1);
 }
 
-int	init_stack_iterator(t_stki *itr, t_stk *stack)
+t_stki	init_stack_iterator(t_stki *itr, t_stk *stack)
 {
 	itr->index = 0;
 	itr->ptr = stack->anchor;
 	itr->stk = stack;
-	return (0);
+	return (*itr);
 }
 
 int	stack_iterator_end(t_stki *itr)

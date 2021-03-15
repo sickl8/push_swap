@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_proto.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/08 16:27:10 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/14 23:18:23 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		o_puts(char *str);
 int		e_puts(char *str);
 void	sort_tab(int *tab, int len);
 int		init_stack(t_stk *stack);
-int		init_stack_iterator(t_stki *itr, t_stk *stack);
+t_stki	init_stack_iterator(t_stki *itr, t_stk *stack);
 int		stack_iterator_end(t_stki *itr);
 int		stack_iterator_advance(t_stki *itr);
 t_clt	*stack_member(int needle, t_stk *stack);
