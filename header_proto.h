@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/15 19:26:37 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/16 03:11:53 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ t_clt	*stack_member(int needle, t_stk *stack);
 void	stack_push_back(int data, t_stk *stack);
 void	stack_push_front(int data, t_stk *stack);
 int		stack_size(t_stk *stack);
-void	add_node(void *data, t_list **list);
+int		add_node(void *data, t_list **list);
 void	error(void);
 int		ft_isdigit(char c);
 void	stack_erase(t_clt *member, t_stk *stack);
-void	stack_swap(t_stk *stack);
+int		stack_swap(t_stk *stack);
 void	stack_rotate(t_stk *stack);
 void	stack_reverse_rotate(t_stk *stack);
 void	stack_push_from_to(t_stk *a_stack, t_stk *b_stack);
@@ -62,5 +62,8 @@ int		evaluate_tab(int *tab, size_t len, size_t stack_len);
 long	ft_min(long x, long y);
 long	ft_max(long x, long y);
 int		stack_reach_closest_member(int m1, int m2, t_stk *stack, t_list **inst);
+t_list	*algo_0(t_stk *a_stack, t_stk *b_stack);
+t_list	*algo_1(t_stk *a_stack);
+int		stack_is_kinda_sorted(t_stk *stack);
 
 #endif

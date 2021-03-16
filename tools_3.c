@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 22:18:30 by sickl8            #+#    #+#             */
-/*   Updated: 2021/03/15 19:39:09 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/15 20:47:53 by sickl8           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	stack_reach_member(int member, int stk, t_stk *stack, t_list **inst)
 		while (stack->anchor->data != member)
 		{
 			stack_reverse_rotate(stack);
-			add_node((void*)RRA + stk, inst);
+			add_node((void*)(long)(RRA + stk), inst);
 		}
 	}
 	else
@@ -48,7 +48,7 @@ void	stack_reach_member(int member, int stk, t_stk *stack, t_list **inst)
 		while (stack->anchor->data != member)
 		{
 			stack_rotate(stack);
-			add_node((void*)RA + stk, inst);
+			add_node((void*)(long)(RA + stk), inst);
 		}
 	}
 }

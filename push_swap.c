@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/15 19:37:22 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/16 01:59:20 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ int		inc_tab(int *tab, size_t len, int members)
 	i = len - 1;
 	slen[A] = members;
 	slen[B] = 0;
-	while (i > -1 && i < len)
+	while (i < len)
 	{
 		chosen = tab[i] + 1;
 		if (chosen > RRR)
@@ -232,109 +232,31 @@ void	generate_tab(int *tab, size_t len, int members)
 	// 	tab[i--] = PA;
 }
 
-int		brute_force_pool(size_t len, t_stk *a_stack, t_list **inst)
+// void	brute_force(t_list *inst, t_stk *a_stack)
+// {
+// 	size_t	max_len;
+// 	size_t	i;
+
+// 	max_len = list_len(inst);
+// 	i = 1;
+// 	while (i < max_len)
+// 	{
+// 		if (brute_force_pool(i, stack_duplicate(a_stack), &inst))
+// 			break ;
+// 		i++;
+// 	}
+// 	print_instructions(inst);
+// }
+
+void	continue_main(t_stk *a_stack, t_stk *b_stack)
 {
-	int		*tab;
-	t_stk	b_stack;
-	int		i;
-
-	// len = 1;
-	// while (len < 500)
-	// {
-	init_stack(&b_stack);
-	len = 1;
-	while (len < 50)
-	{
-		tab = wrap_malloc(sizeof(*tab) * len);
-		// ft_memset(tab, 0, sizeof(*tab) * len);
-		i = -1;
-		while (++i < (int)len)
-			tab[i] = -1;
-		generate_tab(tab, len, a_stack->length);
-		// for (size_t asd = 0; asd < len; asd++)
-		// 	printf("[%d]", tab[asd]);
-		// printf("\n");
-		for (size_t asd = 0; asd < len; asd++)
-			printf("[%s]", g_cor[tab[asd]]);
-		printf("\n");
-		size_t count = 0;
-		while (!inc_tab(tab, len, a_stack->length))
-		{
-			count++;
-		}
-		printf("count = %zu\n", count);
-		len++;
-	}
-	// tab[len - 1] = -1;
-	// while (!inc_tab(tab, 11, len, a_stack->length))
-	// {
-	// 	// apply_instructions(tab, len, a_stack, &b_stack);
-	// 	// if (stack_is_sorted(a_stack) && stack_size(&b_stack) == 0)
-	// 	// {
-	// 	// 	*inst = export_instructions(tab, len);
-	// 	// 	return (1);
-	// 	// }
-	// 	// printf("count = %zu\n", count);
-	// 	count++;
-	// }
-	// printf("count = %zu\n", count);
-	// len++;
-	// }
-	(void)inst;
-	(void)a_stack;
-	exit(0);
-	return (0);
-}
-
-void	brute_force(t_list *inst, t_stk *a_stack)
-{
-	size_t	max_len;
-	size_t	i;
-
-	max_len = list_len(inst);
-	i = 1;
-	while (i < max_len)
-	{
-		if (brute_force_pool(i, stack_duplicate(a_stack), &inst))
-			break ;
-		i++;
-	}
-	print_instructions(inst);
-}
-
-void	continue_main_0(t_stk *a_stack, t_stk *b_stack)
-{
-	int		smallest;
-	int		biggest;
-	int		reached;
-	t_list	*instructions;
-
-	instructions = NULL;
-	while (!stack_is_sorted(a_stack))
-	{
-		smallest = smallest_member(a_stack);
-		biggest = biggest_member(a_stack);
-		// stack_reach_member(smallest, a_stack, &instructions);
-		reached =
-		stack_reach_closest_member(smallest, biggest, a_stack, &instructions);	
-		stack_push_from_a_to_b(a_stack, b_stack);
-		add_node((void*)PB, &instructions);
-		if (reached == biggest && stack_size(b_stack) > 1)
-		{
-			stack_rotate(b_stack);
-			add_node((void*)RB, &instructions);
-		}
-	}
-	biggest = biggest_member(a_stack);
-	stack_reach_member(biggest, B, b_stack, &instructions);
-	while (b_stack->length)
-	{
-		HERE;
-		stack_push_from_b_to_a(a_stack, b_stack);
-		add_node((void*)PA, &instructions);
-	}
-	print_instructions(instructions);
-	// brute_force(instructions, a_stack);
+	t_list	**rez;
+	
+	rez = (t_list*[]){
+	algo_0(stack_duplicate(a_stack), stack_duplicate(b_stack)),
+	algo_1(stack_duplicate(a_stack)),
+	NULL};
+	print_instructions(rez[1]);
 }
 
 int		main(int ac, char **av)
@@ -357,6 +279,6 @@ int		main(int ac, char **av)
 	}
 	if (ac == 2)
 		return (0);
-	continue_main_0(&a_stack, &b_stack);
+	continue_main(&a_stack, &b_stack);
 	return (0);
 }
