@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/16 01:59:20 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/16 19:22:42 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,13 +250,15 @@ void	generate_tab(int *tab, size_t len, int members)
 
 void	continue_main(t_stk *a_stack, t_stk *b_stack)
 {
-	t_list	**rez;
+	t_list	**algo;
 	
-	rez = (t_list*[]){
+	algo = (t_list*[]){
 	algo_0(stack_duplicate(a_stack), stack_duplicate(b_stack)),
 	algo_1(stack_duplicate(a_stack)),
 	NULL};
-	print_instructions(rez[1]);
+	EPV(list_len(algo[0]), "%zu\n");
+	EPV(list_len(algo[1]), "%zu\n");
+	// print_instructions(rez[1]);
 }
 
 int		main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:27:44 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/15 19:23:50 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/16 19:22:36 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define B 1
 
 #define PV(x, y) printf("%s = " y, #x, x)
+#define EPV(x, y) fprintf(stderr, "%s = " y, #x, x)
 #define HERE printf("here?: %s:%d\n", __FILE__, __LINE__)
 
 #endif
