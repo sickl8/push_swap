@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 02:47:37 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/18 23:01:12 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/19 15:56:05 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int		index_of(int member, int *tab, int len)
 			return (ret);
 		ret++;
 	}
-	return (*((int*)0));
+	exit(1);
+	return (0);
 }
 
 int		stack_score(t_stk *stack)
