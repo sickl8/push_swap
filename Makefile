@@ -22,6 +22,7 @@ stack_tools_4.c \
 stack_tools_5.c \
 algo_0.c \
 algo_1.c \
+algo_2.c \
 tools_0.c \
 tools_1.c \
 tools_2.c \

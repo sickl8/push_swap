@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:59:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/16 01:47:13 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/18 22:34:17 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ t_stki	init_stack_iterator(t_stki *itr, t_stk *stack)
 	itr->index = 0;
 	itr->ptr = stack->anchor;
 	itr->stk = stack;
+	itr->data = 0;
+	if (itr->ptr)
+		itr->data = itr->ptr->data;
 	return (*itr);
 }
 
@@ -40,6 +43,7 @@ int stack_iterator_advance(t_stki *itr)
 	if (itr->ptr)
 	{
 		itr->ptr = itr->ptr->next;
+		itr->data = itr->ptr->data;
 		itr->index++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/16 03:11:53 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/19 01:19:02 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	stack_reach_member(int member, int stk, t_stk *stack, t_list **inst);
 t_stk	*stack_duplicate(t_stk *stack);
 void	print_instructions(t_list *instructions);
 void	print_instructions_s(t_list *instructions);
-int		smallest_member(t_stk *stack);
-int		biggest_member(t_stk *stack);
+t_clt	*smallest_member(t_stk *stack);
+t_clt	*biggest_member(t_stk *stack);
 size_t	list_len(t_list *list);
 int		evaluate_tab(int *tab, size_t len, size_t stack_len);
 long	ft_min(long x, long y);
@@ -64,6 +64,10 @@ long	ft_max(long x, long y);
 int		stack_reach_closest_member(int m1, int m2, t_stk *stack, t_list **inst);
 t_list	*algo_0(t_stk *a_stack, t_stk *b_stack);
 t_list	*algo_1(t_stk *a_stack);
+t_list	*algo_2(t_stk *a_stack);
+t_list	*algo_3(t_stk *a, t_stk *b);
 int		stack_is_kinda_sorted(t_stk *stack);
+int		stack_score(t_stk *stack);
+t_list	*algo_4(t_stk *a_stk, t_stk *b_stk);
 
 #endif

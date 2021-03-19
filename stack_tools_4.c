@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:43:48 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/15 19:24:12 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/18 21:49:00 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ t_stk	*stack_duplicate(t_stk *stack)
 	return (ret);
 }
 
-int		biggest_member(t_stk *stack)
+t_clt	*biggest_member(t_stk *stack)
 {
 	t_stki	itr;
-	int		ret;
+	t_clt	*ret;
 
-	ret = INT_MIN;
+	ret = NULL;
 	init_stack_iterator(&itr, stack);
 	while (!stack_iterator_end(&itr))
 	{
-		if (itr.ptr->data > ret)
-			ret = itr.ptr->data;
+		if (!ret || itr.ptr->data > ret->data)
+			ret = itr.ptr;
 		stack_iterator_advance(&itr);
 	}
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/16 01:59:20 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/19 01:01:21 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,13 +250,56 @@ void	generate_tab(int *tab, size_t len, int members)
 
 void	continue_main(t_stk *a_stack, t_stk *b_stack)
 {
-	t_list	**rez;
+	// t_list	**rez;
 	
-	rez = (t_list*[]){
-	algo_0(stack_duplicate(a_stack), stack_duplicate(b_stack)),
-	algo_1(stack_duplicate(a_stack)),
-	NULL};
-	print_instructions(rez[1]);
+	// rez = (t_list*[]){
+	// algo_0(stack_duplicate(a_stack), stack_duplicate(b_stack)),
+	// algo_1(stack_duplicate(a_stack)),
+	// NULL};
+	// print_instructions(rez[1]);
+	int score0 = stack_score(a_stack), score1;
+	t_stk *bk0, *bk1;
+	bk0 = stack_duplicate(a_stack);
+	int call0 = list_len(algo_3(a_stack, b_stack));
+	ITERATE_ON_STACK(a_stack, itr)
+		printf("%d ", itr.data);
+	printf("\n");
+	bk1 = stack_duplicate(a_stack);
+	score1 = stack_score(a_stack);
+	int call1 = list_len(algo_3(a_stack, b_stack));
+	ITERATE_ON_STACK(a_stack, itr)
+		printf("%d ", itr.data);
+	printf("\n");
+	int score2 = stack_score(a_stack);
+	printf("score before: %d\n", score0);
+	printf("score  after: %d\n", score1);
+	printf("score  after: %d\n", score2);
+	printf("call0       : %d\n", call0);
+	printf("call1       : %d\n", call1);
+	// printf("sort 0 score before: %ld\n",
+	// list_len(algo_1(stack_duplicate(bk0))));
+	// printf("sort 0 score  after: %ld\n",
+	// call0 + list_len(algo_1(stack_duplicate(bk1))));
+	// printf("sort 0 score  after: %ld\n",
+	// call0 + call1 + list_len(algo_1(stack_duplicate(a_stack))));
+	printf("sort 1 score before: %ld\n",
+	list_len(algo_0(stack_duplicate(bk0), stack_duplicate(b_stack))));
+	printf("sort 1 score  after: %ld\n",
+	call0 + list_len(algo_0(stack_duplicate(bk1), stack_duplicate(b_stack))));
+	printf("sort 1 score  after: %ld\n",
+	call0 + call1 + list_len(algo_0(stack_duplicate(a_stack), stack_duplicate(b_stack))));
+	printf("sort 2 score before: %ld\n",
+	list_len(algo_4(stack_duplicate(bk0), stack_duplicate(b_stack))));
+	printf("sort 2 score  after: %ld\n",
+	call0 + list_len(algo_4(stack_duplicate(bk1), stack_duplicate(b_stack))));
+	printf("sort 2 score  after: %ld\n",
+	call0 + call1 + list_len(algo_4(stack_duplicate(a_stack), stack_duplicate(b_stack))));
+	// printf("sort 0 score before: %ld\n",
+	// list_len(algo_2(stack_duplicate(bk0))));
+	// printf("sort 0 score  after: %ld\n",
+	// call0 + list_len(algo_2(stack_duplicate(bk1))));
+	// printf("sort 0 score  after: %ld\n",
+	// call0 + call1 + list_len(algo_2(stack_duplicate(a_stack))));
 }
 
 int		main(int ac, char **av)

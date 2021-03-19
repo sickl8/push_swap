@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 22:18:30 by sickl8            #+#    #+#             */
-/*   Updated: 2021/03/15 20:47:53 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/03/18 21:47:47 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ void	stack_reach_member(int member, int stk, t_stk *stack, t_list **inst)
 	}
 }
 
-int		smallest_member(t_stk *stack)
+t_clt	*smallest_member(t_stk *stack)
 {
 	t_stki	itr;
-	int		ret;
+	t_clt	*ret;
 
-	ret = INT_MAX;
+	ret = NULL;
 	init_stack_iterator(&itr, stack);
 	while (!stack_iterator_end(&itr))
 	{
-		if (itr.ptr->data < ret)
-			ret = itr.ptr->data;
+		if (!ret || itr.ptr->data < ret->data)
+			ret = itr.ptr;
 		stack_iterator_advance(&itr);
 	}
 	return (ret);

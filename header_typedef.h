@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:43:00 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/10 14:51:06 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/18 22:32:34 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct	s_stki
 {
 	t_clt	*ptr;
 	t_stk	*stk;
+	int		data;
 	long	index;
 }				t_stki;
 

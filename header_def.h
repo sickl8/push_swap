@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:27:44 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/15 19:23:50 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/03/18 22:54:14 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@
 
 #define PV(x, y) printf("%s = " y, #x, x)
 #define HERE printf("here?: %s:%d\n", __FILE__, __LINE__)
+#define ITERATE_ON_STACK(x, y) for (t_stki y = init_stack_iterator(&y, x); !stack_iterator_end(&y); stack_iterator_advance(&y))
 
 #endif
