@@ -65,6 +65,6 @@ sdeb:
 	gcc $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g -fsanitize=address -DDEBUG
 
 gen:
-	gcc cc.c *tools*.c -o gen
+	gcc cc.c *tools*.c -o gen -lm -g
 
 .PHONY: all $(NAME) clean fclean re deb san

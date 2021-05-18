@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:27:44 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/19 01:42:36 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/09 22:57:38 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@
 # define RRB 9
 # define RRR 10
 
+# define B_SA 1
+# define B_SB 2
+# define B_SS 4
+# define B_PA 8
+# define B_PB 16
+# define B_RA 32
+# define B_RB 64
+# define B_RR 128
+# define B_RRA 256
+# define B_RRB 512
+# define B_RRR 1024
+
 # define A 0
 # define B 1
 
@@ -35,5 +47,6 @@
 #define EPV(x, y) fprintf(stderr, "%s = " y, #x, x)
 #define HERE printf("here?: %s:%d\n", __FILE__, __LINE__)
 #define ITERATE_ON_STACK(x, y) for (t_stki y = init_stack_iterator(&y, x); !stack_iterator_end(&y); stack_iterator_advance(&y))
+#define MALLOC(x, y) (x = malloc(sizeof(*(x)) * (y)))
 
 #endif

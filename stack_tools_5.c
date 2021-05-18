@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 02:47:37 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/19 15:56:05 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/10 00:06:25 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,27 @@ int		stack_score(t_stk *stack)
 	}
 	// printf("\n");
 	return (ret);
+}
+
+int		*to_tab(t_stk *stack)
+{
+	int		*ret;
+	t_itr	itr;
+
+	ret = wrap_malloc(sizeof(*ret) * stack->length);
+	if (!ret)
+		return (NULL);
+	init_stack_iterator(itr, stack);
+	while (!stack_iterator_end(itr))
+	{
+		ret[itr->index] = itr->data;
+		stack_iterator_advance(itr);
+	}
+	return (ret);
+}
+
+void	stack_destroy(t_stk *stack)
+{
+	while (stack->length)
+		stack_erase(stack->anchor, stack);
 }

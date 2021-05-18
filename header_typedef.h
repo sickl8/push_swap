@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:43:00 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/18 22:32:34 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/09 23:39:28 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_list
 
 typedef struct	s_clt
 {
-	int				data;
+	long			data;
 	struct s_clt	*next;
 	struct s_clt	*prev;
 }				t_clt;
@@ -37,14 +37,37 @@ typedef struct	s_stki
 {
 	t_clt	*ptr;
 	t_stk	*stk;
-	int		data;
+	long	data;
 	long	index;
 }				t_stki;
+
+typedef t_stki t_itr[1];
 
 typedef struct	s_tmp0
 {
 	int		a;
 	int		b;
 }				t_tmp0;
+
+typedef struct	s_bf
+{
+	unsigned int		bf;
+	int					ones;
+}				t_bf;
+
+typedef struct	s_ro
+{
+	int		cra;
+	int		crb;
+	int		crra;
+	int		crrb;
+}				t_ro;
+
+typedef struct	s_cell
+{
+	int		pa;
+	int		pb;
+	t_ro	ro;
+}				t_cell;
 
 #endif

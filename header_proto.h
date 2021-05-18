@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/19 01:19:02 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/10 00:02:32 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ t_list	*algo_3(t_stk *a, t_stk *b);
 int		stack_is_kinda_sorted(t_stk *stack);
 int		stack_score(t_stk *stack);
 t_list	*algo_4(t_stk *a_stk, t_stk *b_stk);
+int		*to_tab(t_stk *stack);
+void	stack_destroy(t_stk *stack);
 
 #endif

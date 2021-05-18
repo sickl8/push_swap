@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sys/time.h>
+#include <math.h>
 
 #define PV(x, y) printf("%s = " y, #x, x)
-#define MALLOC(x, y) x = malloc(sizeof(*(x)) * (y))
+// #define MALLOC(x, y) x = malloc(sizeof(*(x)) * (y))
 
 #include "header.h"
 
@@ -20,7 +21,8 @@ int		main(int ac, char **av)
 	{
 		int num;
 		label:
-		num = rand() % len;
+		num = rand() % (len * 2) * pow(-1, rand() % 2);
+		// num = 1 + rand() % len;
 		for (int j = 0; j < i; j++)
 		{
 			if (tab[j] == num)
