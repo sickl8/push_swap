@@ -20,6 +20,7 @@ stack_tools_2.c \
 stack_tools_3.c \
 stack_tools_4.c \
 stack_tools_5.c \
+stack_tools_6.c \
 algo_0.c \
 algo_1.c \
 algo_2.c \

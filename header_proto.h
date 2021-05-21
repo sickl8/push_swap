@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/10 00:02:32 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/19 17:54:28 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,16 @@ int		stack_score(t_stk *stack);
 t_list	*algo_4(t_stk *a_stk, t_stk *b_stk);
 int		*to_tab(t_stk *stack);
 void	stack_destroy(t_stk *stack);
+void	swap_a(t_stk **stacks);
+void	swap_b(t_stk **stacks);
+void	swap_s(t_stk **stacks);
+void	push_a(t_stk **stacks);
+void	push_b(t_stk **stacks);
+void	rotate_a(t_stk **stacks);
+void	rotate_b(t_stk **stacks);
+void	rotate_r(t_stk **stacks);
+void	rrotate_a(t_stk **stacks);
+void	rrotate_b(t_stk **stacks);
+void	rrotate_r(t_stk **stacks);
 
 #endif

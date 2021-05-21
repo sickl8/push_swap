@@ -6,13 +6,46 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/10 01:01:48 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/19 18:16:36 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
 char	**g_cor;
+
+void	apply_isnt(t_stk *a_stack, t_stk *b_stack, int inst)
+{
+	void	(*tab[11])(t_stk**);
+
+	tab[SA] = swap_a;
+	tab[SB] = swap_b;
+	tab[SS] = swap_s;
+	tab[PA] = push_a;
+	tab[PB] = push_b;
+	tab[RA] = rotate_a;
+	tab[RB] = rotate_b;
+	tab[RR] = rotate_r;
+	tab[RRA] = rrotate_a;
+	tab[RRB] = rrotate_b;
+	tab[RRR] = rrotate_r;
+	tab[inst]((t_stk*[]){a_stack, b_stack});
+}
+
+int		apply_inst_lst(t_stk *a_stack, t_stk *b_stack, int *inst, int len)
+{
+	int		i;
+
+	i = -1;
+	a_stack = stack_duplicate(a_stack);
+	b_stack = stack_duplicate(b_stack);
+	while (++i < len)
+		apply_isnt(a_stack, b_stack, inst[i]);
+	i = !b_stack->length && stack_is_sorted(a_stack);
+	stack_destroy(a_stack);
+	stack_destroy(b_stack);
+	return (i);
+}
 
 t_bf	get_pool(int previous_instruction, int position_of_instruction, int instruction_set_length, int members, int push_a_count, int push_b_count, int consecutive_ra, int consecutive_rb, int consecutive_rra, int consecutive_rrb) {
 	t_bf	ret;
@@ -69,7 +102,7 @@ t_bf	get_pool(int previous_instruction, int position_of_instruction, int instruc
 	return (ret);
 }
 
-void	recursive_inst_fill(int *inst_lst, int last_inst, int inst_pos, int set_len, int members, t_cell cell)
+int		recursive_inst_fill(t_stk *a_stack, t_stk *b_stack, int *inst_lst, int last_inst, int inst_pos, int set_len, int members, t_cell cell)
 {
 	t_bf	valid;
 	t_cell	bk;
@@ -80,37 +113,13 @@ void	recursive_inst_fill(int *inst_lst, int last_inst, int inst_pos, int set_len
 	valid = get_pool(last_inst, inst_pos, set_len, members, cell.pa, cell.pb, cell.ro.cra, cell.ro.crb, cell.ro.crra, cell.ro.crrb);
 	i = -1;
 	shift = 0;
-	// PV(valid.ones, "%d, ");
-	// PV(set_len, "%d\n");
 	while (++i < valid.ones)
 	{
 		while (!(1 << shift & valid.bf))
 			shift++;
-		// if (shift == 32)
-		// {
-		// 	PV(valid.bf, "%d\n");
-		// 	PV(valid.ones, "%d\n");
-		// 	PV(i, "%d\n");
-		// }
 		inst = shift;
 		shift++;
 		inst_lst[inst_pos] = inst;
-		// PV(inst_pos, "%d\n");
-		// if (inst_pos + 1 == set_len)
-		// {
-			// PV(set_len, "%d\n");
-			// for (int itr = 0; itr < inst_pos; itr++) {
-			// 	// if (inst_lst[itr] < 0 || inst_lst[itr] > RRR)
-			// 	// {
-			// 	// 	printf("\n");
-			// 	// 	PV(inst_lst[itr], "%d\n");
-			// 	// 	exit(1);
-			// 	// }
-			// 	printf("%s->", g_cor[inst_lst[itr]]);
-			// }
-			// printf("%s\n", g_cor[inst_lst[inst_pos]]);
-		// }
-		// else
 		if (inst_pos + 1 != set_len)
 		{
 			bk = cell;
@@ -128,15 +137,23 @@ void	recursive_inst_fill(int *inst_lst, int last_inst, int inst_pos, int set_len
 				cell.ro.crra++;
 			if (inst == RRB || inst == RRR)
 				cell.ro.crrb++;
-			recursive_inst_fill(inst_lst, inst, inst_pos + 1, set_len, members, cell);
+			if (recursive_inst_fill(a_stack, b_stack, inst_lst, inst, inst_pos + 1, set_len, members, cell))
+				return (1);
 			cell = bk;
 		}
+		else
+		{
+			if (apply_inst_lst(a_stack, b_stack, inst_lst, set_len))
+				return (1);
+		}
 	}
+	return (0);
 }
 
 void	brute_force(t_stk *a_stack, t_stk *b_stack)
 {
 	int		i;
+	int		j;
 	int		*inst;
 	int		members;
 	t_cell	cell;
@@ -144,25 +161,34 @@ void	brute_force(t_stk *a_stack, t_stk *b_stack)
 	i = 0;
 	members = a_stack->length;
 	(void)b_stack;
-	#include <sys/time.h>
-	struct timeval tvs, tve;
-	gettimeofday(&tvs, NULL);
+	// #include <sys/time.h>
+	// struct timeval tvs, tve;
+	// gettimeofday(&tvs, NULL);
 	while (++i < 100)
 	{
-		if (i == 11)
-			break;
 		MALLOC(inst, i);
 		ft_memset((void*)&cell, 0, sizeof(cell));
-		recursive_inst_fill(inst, -1, 0, i, members, cell);
-		PV(i, "%d\n");
+		// printf("%d\n", i);
+		if (recursive_inst_fill(a_stack, b_stack, inst, -1, 0, i, members, cell))
+		{
+			j = i;
+			i = -1;
+			while (++i < j)
+				printf("%s\n", g_cor[inst[i]]);
+			free(inst);
+			break ;
+		}
 		free(inst);
+		if (i == 10)
+			break;
+		// PV(i, "%d\n");
 	}
-	gettimeofday(&tve, NULL);
-	int s, u, m;
-	s = tve.tv_sec - tvs.tv_sec;
-	u = s * 1000000 + tve.tv_usec - tvs.tv_usec;
-	m = u / 1000;
-	printf("%ds %dms\n", u / 1000000, m);
+	// gettimeofday(&tve, NULL);
+	// int s, u, m;
+	// s = tve.tv_sec - tvs.tv_sec;
+	// u = s * 1000000 + tve.tv_usec - tvs.tv_usec;
+	// m = u / 1000;
+	// printf("%ds %dms\n", u / 1000000, m);
 }
 
 void	to_indexes(t_stk *a)
@@ -170,12 +196,14 @@ void	to_indexes(t_stk *a)
 	t_stki	itr;
 	t_stki	sitr;
 	long	index;
+	t_stk	*bk;
 
+	bk = stack_duplicate(a);
 	init_stack_iterator(&itr, a);
 	while (!stack_iterator_end(&itr))
 	{
 		index = 0;
-		init_stack_iterator(&sitr, a);
+		init_stack_iterator(&sitr, bk);
 		while (!stack_iterator_end(&sitr))
 		{
 			if (sitr.data < itr.data)
@@ -185,6 +213,7 @@ void	to_indexes(t_stk *a)
 		itr.ptr->data = index;
 		stack_iterator_advance(&itr);
 	}
+	stack_destroy(bk);
 }
 
 void	continue_main(t_stk *a_stack, t_stk *b_stack)
@@ -197,6 +226,7 @@ void	continue_main(t_stk *a_stack, t_stk *b_stack)
 	// t_stk	temp[1];
 	// inst = NULL;
 	to_indexes(a_stack);
+	// stack_print(a_stack);
 	// t_stk *bk;
 	// bk = stack_duplicate(a_stack);
 	brute_force(a_stack, b_stack);
