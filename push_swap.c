@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/19 18:16:36 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/21 19:45:21 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void	brute_force(t_stk *a_stack, t_stk *b_stack)
 			break ;
 		}
 		free(inst);
-		if (i == 10)
+		if (i == 12)
 			break;
 		// PV(i, "%d\n");
 	}
@@ -229,7 +229,8 @@ void	continue_main(t_stk *a_stack, t_stk *b_stack)
 	// stack_print(a_stack);
 	// t_stk *bk;
 	// bk = stack_duplicate(a_stack);
-	brute_force(a_stack, b_stack);
+	if (!stack_is_sorted(a_stack))
+		brute_force(a_stack, b_stack);
 	stack_destroy(a_stack);
 	// t_itr itr;
 	// init_stack_iterator(itr, a_stack);
@@ -263,6 +264,7 @@ int		main(int ac, char **av)
 	}
 	if (ac == 2)
 		return (0);
+	// if (a_stack.length < 6)
 	continue_main(&a_stack, &b_stack);
 	return (0);
 }
