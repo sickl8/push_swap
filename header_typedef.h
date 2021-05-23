@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:43:00 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/09 23:39:28 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/23 16:02:57 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_stk
 	t_clt	*anchor;
 	t_clt	*list;
 	long	length;
+	void	(*tab[11])(struct s_stk**);
 }				t_stk;
 
 typedef struct	s_stki
@@ -69,5 +70,7 @@ typedef struct	s_cell
 	int		pb;
 	t_ro	ro;
 }				t_cell;
+
+typedef struct timeval tv;
 
 #endif

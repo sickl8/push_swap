@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:59:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/18 22:34:17 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/23 15:54:20 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@ int	init_stack(t_stk *stack)
 	stack->anchor = NULL;
 	stack->list = NULL;
 	stack->length = 0;
+	stack->tab[SA] = swap_a;
+	stack->tab[SB] = swap_b;
+	stack->tab[SS] = swap_s;
+	stack->tab[PA] = push_a;
+	stack->tab[PB] = push_b;
+	stack->tab[RA] = rotate_a;
+	stack->tab[RB] = rotate_b;
+	stack->tab[RR] = rotate_r;
+	stack->tab[RRA] = rrotate_a;
+	stack->tab[RRB] = rrotate_b;
+	stack->tab[RRR] = rrotate_r;
 	return (1);
 }
 

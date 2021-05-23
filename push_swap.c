@@ -6,30 +6,36 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/21 19:45:21 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/23 19:48:56 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+#include <sys/time.h>
 
 char	**g_cor;
+struct timeval i_time[11];
+long	calls[11];
+double	per_call[11];
 
-void	apply_isnt(t_stk *a_stack, t_stk *b_stack, int inst)
+void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
 {
-	void	(*tab[11])(t_stk**);
+	(void)a_stack;
+	(void)b_stack;
+}
 
-	tab[SA] = swap_a;
-	tab[SB] = swap_b;
-	tab[SS] = swap_s;
-	tab[PA] = push_a;
-	tab[PB] = push_b;
-	tab[RA] = rotate_a;
-	tab[RB] = rotate_b;
-	tab[RR] = rotate_r;
-	tab[RRA] = rrotate_a;
-	tab[RRB] = rrotate_b;
-	tab[RRR] = rrotate_r;
-	tab[inst]((t_stk*[]){a_stack, b_stack});
+void	apply_inst(t_stk *a_stack, t_stk *b_stack, int inst)
+{
+	tv s, e;
+	suseconds_t dif;
+	gettimeofday(&s, NULL);
+	a_stack->tab[inst]((t_stk*[]){a_stack, b_stack});
+	gettimeofday(&e, NULL);
+	dif = (e.tv_sec - s.tv_sec) * 1000000 + e.tv_usec - s.tv_usec;
+	i_time[inst].tv_usec += dif;
+	i_time[inst].tv_sec += i_time[inst].tv_usec / 1000000;
+	i_time[inst].tv_usec %= 1000000;
+	calls[inst]++;
 }
 
 int		apply_inst_lst(t_stk *a_stack, t_stk *b_stack, int *inst, int len)
@@ -40,7 +46,7 @@ int		apply_inst_lst(t_stk *a_stack, t_stk *b_stack, int *inst, int len)
 	a_stack = stack_duplicate(a_stack);
 	b_stack = stack_duplicate(b_stack);
 	while (++i < len)
-		apply_isnt(a_stack, b_stack, inst[i]);
+		apply_inst(a_stack, b_stack, inst[i]);
 	i = !b_stack->length && stack_is_sorted(a_stack);
 	stack_destroy(a_stack);
 	stack_destroy(b_stack);
@@ -161,14 +167,12 @@ void	brute_force(t_stk *a_stack, t_stk *b_stack)
 	i = 0;
 	members = a_stack->length;
 	(void)b_stack;
-	// #include <sys/time.h>
-	// struct timeval tvs, tve;
-	// gettimeofday(&tvs, NULL);
-	while (++i < 100)
+	while (i++ < 30)
 	{
 		MALLOC(inst, i);
 		ft_memset((void*)&cell, 0, sizeof(cell));
-		// printf("%d\n", i);
+		ft_memset((void*)i_time, 0, sizeof(i_time));
+		ft_memset((void*)calls, 0, sizeof(calls));
 		if (recursive_inst_fill(a_stack, b_stack, inst, -1, 0, i, members, cell))
 		{
 			j = i;
@@ -176,19 +180,27 @@ void	brute_force(t_stk *a_stack, t_stk *b_stack)
 			while (++i < j)
 				printf("%s\n", g_cor[inst[i]]);
 			free(inst);
-			break ;
+			return ;
 		}
 		free(inst);
-		if (i == 12)
-			break;
-		// PV(i, "%d\n");
+		for (int itr = 0; itr < RRR; itr++)
+		{
+			per_call[itr] = (double)(i_time[itr].tv_sec * 1000000 + i_time[itr].tv_usec) / (double)calls[itr];
+			printf("%s: %lds %dms, calls: %ld, percall: %lfus\n", g_cor[itr], i_time[itr].tv_sec, i_time[itr].tv_usec / 1000, calls[itr], per_call[itr]);
+		}
+		tv tmp;
+		tmp.tv_sec = 0;
+		tmp.tv_usec = 0;
+		for (int itr = 0; itr < RRR; itr++)
+		{
+			tmp.tv_usec += i_time[itr].tv_sec * 1000000 + i_time[itr].tv_usec;
+			tmp.tv_sec += tmp.tv_usec / 1000000;
+			tmp.tv_usec %= 1000000;
+		}
+		printf("total: %lds %dms\n", tmp.tv_sec, tmp.tv_usec / 1000);
+		PV(i, "%d\n");
 	}
-	// gettimeofday(&tve, NULL);
-	// int s, u, m;
-	// s = tve.tv_sec - tvs.tv_sec;
-	// u = s * 1000000 + tve.tv_usec - tvs.tv_usec;
-	// m = u / 1000;
-	// printf("%ds %dms\n", u / 1000000, m);
+	taxi_driver(a_stack, b_stack);
 }
 
 void	to_indexes(t_stk *a)
@@ -265,6 +277,8 @@ int		main(int ac, char **av)
 	if (ac == 2)
 		return (0);
 	// if (a_stack.length < 6)
-	continue_main(&a_stack, &b_stack);
+		continue_main(&a_stack, &b_stack);
+	// else
+		// taxi_driver(&a_stack, &b_stack);
 	return (0);
 }

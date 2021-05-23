@@ -7,6 +7,7 @@ stack_tools_1.c \
 stack_tools_2.c \
 stack_tools_3.c \
 stack_tools_4.c \
+stack_tools_6.c \
 tools_0.c \
 tools_1.c \
 tools_2.c \
