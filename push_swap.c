@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/23 19:48:56 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/24 16:21:01 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,21 @@ double	per_call[11];
 
 void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
 {
-	(void)a_stack;
-	(void)b_stack;
+	 
 }
 
 void	apply_inst(t_stk *a_stack, t_stk *b_stack, int inst)
 {
-	tv s, e;
-	suseconds_t dif;
-	gettimeofday(&s, NULL);
+	// tv s, e;
+	// suseconds_t dif;
+	// gettimeofday(&s, NULL);
 	a_stack->tab[inst]((t_stk*[]){a_stack, b_stack});
-	gettimeofday(&e, NULL);
-	dif = (e.tv_sec - s.tv_sec) * 1000000 + e.tv_usec - s.tv_usec;
-	i_time[inst].tv_usec += dif;
-	i_time[inst].tv_sec += i_time[inst].tv_usec / 1000000;
-	i_time[inst].tv_usec %= 1000000;
-	calls[inst]++;
+	// gettimeofday(&e, NULL);
+	// dif = (e.tv_sec - s.tv_sec) * 1000000 + e.tv_usec - s.tv_usec;
+	// i_time[inst].tv_usec += dif;
+	// i_time[inst].tv_sec += i_time[inst].tv_usec / 1000000;
+	// i_time[inst].tv_usec %= 1000000;
+	// calls[inst]++;
 }
 
 int		apply_inst_lst(t_stk *a_stack, t_stk *b_stack, int *inst, int len)
@@ -183,22 +182,22 @@ void	brute_force(t_stk *a_stack, t_stk *b_stack)
 			return ;
 		}
 		free(inst);
-		for (int itr = 0; itr < RRR; itr++)
-		{
-			per_call[itr] = (double)(i_time[itr].tv_sec * 1000000 + i_time[itr].tv_usec) / (double)calls[itr];
-			printf("%s: %lds %dms, calls: %ld, percall: %lfus\n", g_cor[itr], i_time[itr].tv_sec, i_time[itr].tv_usec / 1000, calls[itr], per_call[itr]);
-		}
-		tv tmp;
-		tmp.tv_sec = 0;
-		tmp.tv_usec = 0;
-		for (int itr = 0; itr < RRR; itr++)
-		{
-			tmp.tv_usec += i_time[itr].tv_sec * 1000000 + i_time[itr].tv_usec;
-			tmp.tv_sec += tmp.tv_usec / 1000000;
-			tmp.tv_usec %= 1000000;
-		}
-		printf("total: %lds %dms\n", tmp.tv_sec, tmp.tv_usec / 1000);
-		PV(i, "%d\n");
+		// for (int itr = 0; itr < RRR; itr++)
+		// {
+		// 	per_call[itr] = (double)(i_time[itr].tv_sec * 1000000 + i_time[itr].tv_usec) / (double)calls[itr];
+		// 	printf("%s: %lds %dms, calls: %ld, percall: %lfus\n", g_cor[itr], i_time[itr].tv_sec, i_time[itr].tv_usec / 1000, calls[itr], per_call[itr]);
+		// }
+		// tv tmp;
+		// tmp.tv_sec = 0;
+		// tmp.tv_usec = 0;
+		// for (int itr = 0; itr < RRR; itr++)
+		// {
+		// 	tmp.tv_usec += i_time[itr].tv_sec * 1000000 + i_time[itr].tv_usec;
+		// 	tmp.tv_sec += tmp.tv_usec / 1000000;
+		// 	tmp.tv_usec %= 1000000;
+		// }
+		// printf("total: %lds %dms\n", tmp.tv_sec, tmp.tv_usec / 1000);
+		// PV(i, "%d\n");
 	}
 	taxi_driver(a_stack, b_stack);
 }
@@ -276,9 +275,9 @@ int		main(int ac, char **av)
 	}
 	if (ac == 2)
 		return (0);
-	// if (a_stack.length < 6)
+	if (a_stack.length < 6)
 		continue_main(&a_stack, &b_stack);
-	// else
-		// taxi_driver(&a_stack, &b_stack);
+	else
+		taxi_driver(&a_stack, &b_stack);
 	return (0);
 }
