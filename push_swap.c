@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/24 16:21:01 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/25 18:35:52 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,16 @@ double	per_call[11];
 
 void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
 {
-	 
+	t_list	*inst;
+	int		index_of_zero;
+	int		index_of_current;
+
+	inst = NULL;
+	while (!stack_is_kinda_sorted(a_stack) || b_stack->length)
+	{
+		index_of_zero = stack_member_index(0, a_stack);
+		
+	}
 }
 
 void	apply_inst(t_stk *a_stack, t_stk *b_stack, int inst)
