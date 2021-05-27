@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/25 18:35:52 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/26 16:22:11 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
 {
 	t_list	*inst;
 	int		index_of_zero;
-	int		index_of_current;
+	// int		index_of_current;
 
 	inst = NULL;
 	while (!stack_is_kinda_sorted(a_stack) || b_stack->length)
@@ -175,8 +175,9 @@ void	brute_force(t_stk *a_stack, t_stk *b_stack)
 	i = 0;
 	members = a_stack->length;
 	(void)b_stack;
-	while (i++ < 30)
+	while (i++ < 10)
 	{
+		PV(i, "%d\n");
 		MALLOC(inst, i);
 		ft_memset((void*)&cell, 0, sizeof(cell));
 		ft_memset((void*)i_time, 0, sizeof(i_time));
@@ -206,7 +207,6 @@ void	brute_force(t_stk *a_stack, t_stk *b_stack)
 		// 	tmp.tv_usec %= 1000000;
 		// }
 		// printf("total: %lds %dms\n", tmp.tv_sec, tmp.tv_usec / 1000);
-		// PV(i, "%d\n");
 	}
 	taxi_driver(a_stack, b_stack);
 }
@@ -284,7 +284,7 @@ int		main(int ac, char **av)
 	}
 	if (ac == 2)
 		return (0);
-	if (a_stack.length < 6)
+	if (a_stack.length < 10)
 		continue_main(&a_stack, &b_stack);
 	else
 		taxi_driver(&a_stack, &b_stack);
