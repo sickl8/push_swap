@@ -48,7 +48,8 @@ $(PUSH_SWAP):
 	gcc $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g
 
 clean:
-	rm -rf a.out a.out.dSYM $(CHECKER).dSYM $(PUSH_SWAP).dSYM
+	rm -rf $(CHECKER).dSYM $(PUSH_SWAP).dSYM a.out a.out.dSYM *.dSYM
+
 fclean: clean
 	rm -rf $(CHECKER) $(PUSH_SWAP) $(GEN)
 
