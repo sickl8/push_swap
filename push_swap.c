@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/26 16:22:11 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/30 17:01:07 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,18 @@ void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
 {
 	t_list	*inst;
 	int		index_of_zero;
+	int		steps_to_move;
 	// int		index_of_current;
 
 	inst = NULL;
+	stack_print(a_stack);
 	while (!stack_is_kinda_sorted(a_stack) || b_stack->length)
 	{
 		index_of_zero = stack_member_index(0, a_stack);
-		
+		steps_to_move = a_stack->anchor->data + index_of_zero - a_stack->length;
+		// printf("%d\n", steps_to_move);
+		PV(steps_to_move, "%d\n");
+		break;
 	}
 }
 
@@ -284,9 +289,11 @@ int		main(int ac, char **av)
 	}
 	if (ac == 2)
 		return (0);
-	if (a_stack.length < 10)
-		continue_main(&a_stack, &b_stack);
-	else
+	to_indexes(&a_stack);
+		
+	// if (a_stack.length < 10)
+		// continue_main(&a_stack, &b_stack);
+	// else
 		taxi_driver(&a_stack, &b_stack);
 	return (0);
 }

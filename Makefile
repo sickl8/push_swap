@@ -69,4 +69,7 @@ sdeb:
 gen:
 	gcc cc.c *tools*.c -o gen -lm -g
 
+test0:
+	./gen 5 0 > 1; cat 1; bash -c "./push_swap $$(cat 1)"
+
 .PHONY: all $(NAME) clean fclean re deb san
