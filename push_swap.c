@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/30 17:01:07 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/01 17:55:09 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,38 @@ struct timeval i_time[11];
 long	calls[11];
 double	per_call[11];
 
+int		reach_closest_unsorted_member(t_stk *stk, int name, t_list **ist, int m)
+{
+	t_itr	adv;
+	t_itr	reg;
+	int		steps;
+	long	member;
+
+	init_stack_iterator(adv, stk);
+	init_stack_iterator(reg, stk);
+	while (!stack_iterator_end(adv) && !stack_iterator_end(reg))
+	{
+		steps = stack_distance(0, adv->data, stk) - adv->data;
+		member = adv->data;
+		if (ft_abs(steps) <= m)
+		{
+			steps = stack_distance(0, reg->data, stk) - reg->data;
+			member = reg->data;
+		}
+		if (ft_abs(steps) > m)
+		{
+			stack_reach_member(member, name, stk, ist);
+			return (steps);
+		}
+		stack_iterator_advance(adv) && stack_iterator_regress(reg);
+	}
+	return (INT_MAX);
+}
+
 void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
 {
 	t_list	*inst;
-	int		index_of_zero;
+	// int		index_of_zero;
 	int		steps_to_move;
 	// int		index_of_current;
 
@@ -29,26 +57,20 @@ void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
 	stack_print(a_stack);
 	while (!stack_is_kinda_sorted(a_stack) || b_stack->length)
 	{
-		index_of_zero = stack_member_index(0, a_stack);
-		steps_to_move = a_stack->anchor->data + index_of_zero - a_stack->length;
+		steps_to_move = reach_closest_unsorted_member(a_stack, A, &inst, 1);
 		// printf("%d\n", steps_to_move);
 		PV(steps_to_move, "%d\n");
+		if (ft_abs(steps_to_move) > a_stack->length / 2)
+			steps_to_move = ft_abs(a_stack->length - ft_abs(steps_to_move)) * (-steps_to_move / ft_abs(steps_to_move));
+		PV(steps_to_move, "%d\n");
+		stack_print(a_stack);
+		
+		stack_reach_index(steps_to_move, A, (t_stk*[]){a_stack, b_stack}, &inst);
+		HERE;
+		stack_print(a_stack);
 		break;
 	}
-}
-
-void	apply_inst(t_stk *a_stack, t_stk *b_stack, int inst)
-{
-	// tv s, e;
-	// suseconds_t dif;
-	// gettimeofday(&s, NULL);
-	a_stack->tab[inst]((t_stk*[]){a_stack, b_stack});
-	// gettimeofday(&e, NULL);
-	// dif = (e.tv_sec - s.tv_sec) * 1000000 + e.tv_usec - s.tv_usec;
-	// i_time[inst].tv_usec += dif;
-	// i_time[inst].tv_sec += i_time[inst].tv_usec / 1000000;
-	// i_time[inst].tv_usec %= 1000000;
-	// calls[inst]++;
+	print_instructions(inst);
 }
 
 int		apply_inst_lst(t_stk *a_stack, t_stk *b_stack, int *inst, int len)

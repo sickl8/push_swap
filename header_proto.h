@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/19 17:54:28 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/01 17:49:33 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		init_stack(t_stk *stack);
 t_stki	init_stack_iterator(t_stki *itr, t_stk *stack);
 int		stack_iterator_end(t_stki *itr);
 int		stack_iterator_advance(t_stki *itr);
+int		stack_iterator_regress(t_stki *itr);
 t_clt	*stack_member(int needle, t_stk *stack);
 void	stack_push_back(int data, t_stk *stack);
 void	stack_push_front(int data, t_stk *stack);
@@ -82,5 +83,9 @@ void	rotate_r(t_stk **stacks);
 void	rrotate_a(t_stk **stacks);
 void	rrotate_b(t_stk **stacks);
 void	rrotate_r(t_stk **stacks);
+int		stack_distance(int a, int b, t_stk *stack);
+void	apply_inst(t_stk *a_stack, t_stk *b_stack, int inst);
+void	stack_reach_index(int index, int stk, t_stk **stacks, t_list **lst);
+
 
 #endif

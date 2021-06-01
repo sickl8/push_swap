@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:59:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/23 15:54:20 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/05/31 20:40:27 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,16 @@ int stack_iterator_advance(t_stki *itr)
 		itr->data = itr->ptr->data;
 		itr->index++;
 	}
-	return (0);
+	return (1);
 }
 
-t_clt	*stack_member(int needle, t_stk *stack)
+int	stack_iterator_regress(t_stki *itr)
 {
-	t_stki	itr;
-
-	init_stack_iterator(&itr, stack);
-	while (!stack_iterator_end(&itr))
+	if (itr->ptr)
 	{
-		if (itr.ptr->data == needle)
-			return (itr.ptr);
-		stack_iterator_advance(&itr);
+		itr->ptr = itr->ptr->prev;
+		itr->data = itr->ptr->data;
+		itr->index++;
 	}
-	return (NULL);
+	return (1);
 }
