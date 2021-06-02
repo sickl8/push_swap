@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 18:34:58 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/01 17:57:44 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/02 19:30:22 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int		stack_distance(int a, int b, t_stk *stack)
 	stack->anchor = stack_member(a, stack);
 	distance = stack_member_index(b, stack);
 	stack->anchor = tmp;
+	PV(a, "%d\n");
+	PV(b, "%d\n");
+	PV(distance, "%d\n");
 	return (distance);
 }
 

@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/01 17:49:33 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/02 19:09:29 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	rrotate_r(t_stk **stacks);
 int		stack_distance(int a, int b, t_stk *stack);
 void	apply_inst(t_stk *a_stack, t_stk *b_stack, int inst);
 void	stack_reach_index(int index, int stk, t_stk **stacks, t_list **lst);
+void	apply_and_push(long inst, t_list **lst, t_stk *a, t_stk *b);
+long	sign(long x);
 
 
 #endif

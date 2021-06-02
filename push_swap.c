@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/01 17:55:09 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/02 20:18:36 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,35 @@ struct timeval i_time[11];
 long	calls[11];
 double	per_call[11];
 
-int		reach_closest_unsorted_member(t_stk *stk, int name, t_list **ist, int m)
+
+
+t_tmp0	reach_closest_unsorted_member(t_stk *stk, int name, t_list **ist, int m)
 {
 	t_itr	adv;
 	t_itr	reg;
-	int		steps;
-	long	member;
+	t_tmp0	ms;
 
 	init_stack_iterator(adv, stk);
 	init_stack_iterator(reg, stk);
 	while (!stack_iterator_end(adv) && !stack_iterator_end(reg))
 	{
-		steps = stack_distance(0, adv->data, stk) - adv->data;
-		member = adv->data;
-		if (ft_abs(steps) <= m)
+		ms.steps = adv->data - stack_distance(0, adv->data, stk);
+		ms.member = adv->data;
+		if (ft_abs(ms.steps) <= m)
 		{
-			steps = stack_distance(0, reg->data, stk) - reg->data;
-			member = reg->data;
+			ms.steps = reg->data - stack_distance(0, reg->data, stk);
+			ms.member = reg->data;
 		}
-		if (ft_abs(steps) > m)
+		if (ft_abs(ms.steps) > m && ms.member)
 		{
-			stack_reach_member(member, name, stk, ist);
-			return (steps);
+			// PV(ms.member, "%ld\n");
+			// PV(ms.steps, "%ld\n");
+			stack_reach_member(ms.member, name, stk, ist);
+			return (ms);
 		}
 		stack_iterator_advance(adv) && stack_iterator_regress(reg);
 	}
-	return (INT_MAX);
+	return ((t_tmp0){-1, -1});
 }
 
 void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
@@ -51,22 +54,27 @@ void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
 	t_list	*inst;
 	// int		index_of_zero;
 	int		steps_to_move;
+	t_tmp0	ms;
 	// int		index_of_current;
 
 	inst = NULL;
 	stack_print(a_stack);
 	while (!stack_is_kinda_sorted(a_stack) || b_stack->length)
 	{
-		steps_to_move = reach_closest_unsorted_member(a_stack, A, &inst, 1);
+		ms = reach_closest_unsorted_member(a_stack, A, &inst, 1);
+		steps_to_move = ms.steps;
+		PV(ms.member, "%ld\n");
 		// printf("%d\n", steps_to_move);
 		PV(steps_to_move, "%d\n");
 		if (ft_abs(steps_to_move) > a_stack->length / 2)
 			steps_to_move = ft_abs(a_stack->length - ft_abs(steps_to_move)) * (-steps_to_move / ft_abs(steps_to_move));
 		PV(steps_to_move, "%d\n");
 		stack_print(a_stack);
-		
+		apply_and_push(PB, &inst, a_stack, b_stack);
 		stack_reach_index(steps_to_move, A, (t_stk*[]){a_stack, b_stack}, &inst);
 		HERE;
+		apply_and_push(PA, &inst, a_stack, b_stack);
+		stack_reach_member(0, A, a_stack, &inst);
 		stack_print(a_stack);
 		break;
 	}

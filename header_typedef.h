@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:43:00 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/23 16:02:57 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/02 16:34:54 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ typedef t_stki t_itr[1];
 
 typedef struct	s_tmp0
 {
-	int		a;
-	int		b;
+	long	member;
+	long	steps;
 }				t_tmp0;
 
 typedef struct	s_bf
