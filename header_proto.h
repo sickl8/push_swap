@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/02 19:09:29 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/05 12:38:40 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	stack_rotate(t_stk *stack);
 void	stack_reverse_rotate(t_stk *stack);
 void	stack_push_from_to(t_stk *a_stack, t_stk *b_stack);
 int		stack_is_sorted(t_stk *stack);
-void	stack_print(t_stk *stack);
+void	stack_print(t_stk *stack, char sep);
+void	stack_print_from_anchor(t_stk *stack, char sep);
 void	double_stack_print(t_stk *a_stack, t_stk *b_stack);
 void	stack_push_from_a_to_b(t_stk *a, t_stk *b);
 void	stack_push_from_b_to_a(t_stk *a, t_stk *b);
@@ -85,7 +86,7 @@ void	rrotate_b(t_stk **stacks);
 void	rrotate_r(t_stk **stacks);
 int		stack_distance(int a, int b, t_stk *stack);
 void	apply_inst(t_stk *a_stack, t_stk *b_stack, int inst);
-void	stack_reach_index(int index, int stk, t_stk **stacks, t_list **lst);
+void	stack_move_x_steps(int index, int stk, t_stk **stacks, t_list **lst);
 void	apply_and_push(long inst, t_list **lst, t_stk *a, t_stk *b);
 long	sign(long x);
 

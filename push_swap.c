@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/02 20:18:36 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/05 12:41:39 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,47 @@ struct timeval i_time[11];
 long	calls[11];
 double	per_call[11];
 
+// long	*locate_clients(t_stk *a, t_tmp0 ms)
+// {
+// 	int		inst;
+// 	int		steps;
 
+// 	inst = RA + (RRA - RA) * (ms.steps < 0);
+// 	steps = ft_abs(ms.steps);
+// 	while (steps--)
+// 	{
+		
+// 	}
+// }
+
+t_tmp0	reach_least_sorted_member(t_stk *stk, int name, t_list **ist, int min)
+{
+	int		i;
+	t_tmp0	ret;
+	int		dis;
+	int		head;
+
+	head = stk->anchor->data;
+	ret.member = -1;
+	ret.steps = min;
+	i = 0;
+	while (++i < stk->length)
+	{
+		if (ft_abs(i - stack_distance(0, i, stk)) <
+		ft_abs(i - stack_distance(i, 0, stk)))
+			dis = i - stack_distance(0, i, stk);
+		else
+			dis = i - stack_distance(i, 0, stk);
+		if (ft_abs(dis) > ft_abs(ret.steps) || (!(dis - ret.steps) &&
+		stack_distance(head, i, stk) < stack_distance(head, ret.member, stk)))
+			ret = (t_tmp0){i, dis};
+	}
+	HERE;
+	if (ret.member + 1)
+		stack_reach_member(ret.member, name, stk, ist);
+	HERE;
+	return (ret);
+}
 
 t_tmp0	reach_closest_unsorted_member(t_stk *stk, int name, t_list **ist, int m)
 {
@@ -55,13 +95,15 @@ void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
 	// int		index_of_zero;
 	int		steps_to_move;
 	t_tmp0	ms;
+	// long	*clients;
 	// int		index_of_current;
 
 	inst = NULL;
-	stack_print(a_stack);
+	stack_print(a_stack, '\n');
 	while (!stack_is_kinda_sorted(a_stack) || b_stack->length)
 	{
-		ms = reach_closest_unsorted_member(a_stack, A, &inst, 1);
+		// ms = reach_closest_unsorted_member(a_stack, A, &inst, 1);
+		ms = reach_least_sorted_member(a_stack, A, &inst, 1);
 		steps_to_move = ms.steps;
 		PV(ms.member, "%ld\n");
 		// printf("%d\n", steps_to_move);
@@ -69,14 +111,15 @@ void	taxi_driver(t_stk *a_stack, t_stk *b_stack)
 		if (ft_abs(steps_to_move) > a_stack->length / 2)
 			steps_to_move = ft_abs(a_stack->length - ft_abs(steps_to_move)) * (-steps_to_move / ft_abs(steps_to_move));
 		PV(steps_to_move, "%d\n");
-		stack_print(a_stack);
+		// clients = locate_clients(a_stack, ms);
+		// stack_print(a_stack);
 		apply_and_push(PB, &inst, a_stack, b_stack);
-		stack_reach_index(steps_to_move, A, (t_stk*[]){a_stack, b_stack}, &inst);
-		HERE;
+		stack_move_x_steps(steps_to_move, A, (t_stk*[]){a_stack, b_stack}, &inst);
+		// HERE;
 		apply_and_push(PA, &inst, a_stack, b_stack);
 		stack_reach_member(0, A, a_stack, &inst);
-		stack_print(a_stack);
-		break;
+		stack_print_from_anchor(a_stack, ' ');
+		// break;
 	}
 	print_instructions(inst);
 }

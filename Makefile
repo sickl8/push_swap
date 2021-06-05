@@ -9,6 +9,7 @@ stack_tools_3.c \
 stack_tools_4.c \
 stack_tools_6.c \
 stack_tools_7.c \
+stack_tools_8.c \
 tools_0.c \
 tools_1.c \
 tools_2.c \
@@ -24,6 +25,7 @@ stack_tools_4.c \
 stack_tools_5.c \
 stack_tools_6.c \
 stack_tools_7.c \
+stack_tools_8.c \
 algo_0.c \
 algo_1.c \
 algo_2.c \

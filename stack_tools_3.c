@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:51:10 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/16 01:57:32 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/05 12:38:05 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		stack_is_sorted(t_stk *stack)
 	return (1);
 }
 
-void	stack_print(t_stk *stack)
+void	stack_print(t_stk *stack, char sep)
 {
 	t_stki	itr;
 
@@ -37,7 +37,7 @@ void	stack_print(t_stk *stack)
 	while (!stack_iterator_end(&itr))
 	{
 		ft_putnbr(itr.ptr->data);
-		o_puts("\n");
+		o_puts((char[]){sep, '\0'});
 		stack_iterator_advance(&itr);	
 	}
 }

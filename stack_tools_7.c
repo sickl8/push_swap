@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 18:34:58 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/02 19:30:22 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/05 11:52:21 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	apply_inst(t_stk *a_stack, t_stk *b_stack, int inst)
 	a_stack->tab[inst]((t_stk*[]){a_stack, b_stack});
 }
 
-void	stack_reach_index(int index, int stk, t_stk **stacks, t_list **lst)
+void	stack_move_x_steps(int index, int stk, t_stk **stacks, t_list **lst)
 {
 	long	inst;
 
