@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:37:21 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/15 19:25:30 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/06 20:17:45 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,42 @@ size_t	ft_strlen(char *str)
 	return (ret);
 }
 
-int		ft_putstr(int fd, char *str)
+int	ft_putstr(int fd, char *str)
 {
 	return (write(fd, str, ft_strlen(str)));
 }
 
-int		o_puts(char *str)
+int	o_puts(char *str)
 {
 	return (ft_putstr(STDOUT_FILENO, str));
 }
 
-int		e_puts(char *str)
+int	e_puts(char *str)
 {
 	return (ft_putstr(STDERR_FILENO, str));
 }
 
 int	ft_atoi(const char *str)
 {
-	long i;
-	long nbr;
-	long sign;
+	long	i;
+	long	nbr;
+	long	sign;
 
 	sign = 1;
 	nbr = 0;
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\v' || str[i] == '\f'
-			|| str[i] == '\n' || str[i] == '\r')
+		|| str[i] == '\n' || str[i] == '\r')
 		i++;
 	if (str[i] == '+' || str[i] == '-')
-		sign = (str[i++] == '-' ? -1 : 1);
+		sign = (str[i++] == '-') * -2 + 1;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if ((unsigned long)__LONG_MAX__ < (unsigned long)nbr * 10 + str[i] - 48
-				&& sign == 1)
+			&& sign == 1)
 			return (-1);
 		else if ((unsigned long)__LONG_MAX__ < (unsigned long)nbr * 10 + str[i]
-				- 48 && sign == -1)
+			- 48 && sign == -1)
 			return (0);
 		nbr = nbr * 10 + str[i++] - 48;
 	}

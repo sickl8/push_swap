@@ -4,41 +4,50 @@
 #include <sys/time.h>
 #include <math.h>
 
-#define PV(x, y) printf("%s = " y, #x, x)
-// #define MALLOC(x, y) x = malloc(sizeof(*(x)) * (y))
-
 #include "header.h"
 
-
-int		main(int ac, char **av)
+typedef struct s_i
 {
-	struct timeval taym;
+	long	len;
+	long	num;
+	long	i;
+	long	j;
+}				t_i;
+
+void	print(int len, long *tab)
+{
+	int		i;
+
+	i = -1;
+	while (++i < len)
+		printf("%ld ", tab[i]);
+	printf("\n");
+}
+
+int	main(int ac, char **av)
+{
+	long			*tab;
+	struct timeval	taym;
+	int				indexes;
+	t_i				x;
+
+	x.len = !(!(av[1])) * ft_atoi(av[1]) + !(av[1]) * 20;
+	indexes = av[1] && av[2];
 	gettimeofday(&taym, NULL);
 	srand(taym.tv_sec * 1000000 + taym.tv_usec);
-	long *tab;
-	int indexes = FALSE;
-	long len = av[1] ? ft_atoi(av[1]) : 20;
-	if (av[1] && av[2])
-		indexes = TRUE;
-	MALLOC(tab, len);
-	for (long i = 0; i < len; i++)
+	tab = malloc(sizeof(*(tab)) * (x.len));
+	x.i = -1;
+	while (++x.i < x.len)
 	{
-		long num;
-		label:
-		num = rand() % (len * 2) * pow(-1, rand() % 2);
-		if (indexes)
-			num = labs(num) % len;
-		// num = 1 + rand() % len;
-		for (long j = 0; j < i; j++)
-		{
-			if (tab[j] == num)
-				goto label;
-		}
-		tab[i] = num;
+		x.num = rand() % (x.len * 2) * pow(-1, rand() % 2);
+		x.num = indexes * (labs(x.num) % x.len) + x.num * !indexes;
+		x.j = -1;
+		while (++x.j < x.i)
+			if (tab[x.j] == x.num && 1 + 0 * x.i--)
+				break ;
+		if (x.j < x.i)
+			continue ;
+		tab[x.i] = x.num;
 	}
-	for (int i = 0; i < len; i++)
-	{
-		printf("%ld ", tab[i]);
-	}
-	printf("\n");
+	print(x.len, tab);
 }

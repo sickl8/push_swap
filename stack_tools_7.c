@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 18:34:58 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/05 11:52:21 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/06 21:39:17 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_clt	*stack_member(int needle, t_stk *stack)
 	return (NULL);
 }
 
-int		stack_distance(int a, int b, t_stk *stack)
+int	stack_distance(int a, int b, t_stk *stack)
 {
 	t_clt	*tmp;
 	int		distance;
@@ -35,15 +35,12 @@ int		stack_distance(int a, int b, t_stk *stack)
 	stack->anchor = stack_member(a, stack);
 	distance = stack_member_index(b, stack);
 	stack->anchor = tmp;
-	PV(a, "%d\n");
-	PV(b, "%d\n");
-	PV(distance, "%d\n");
 	return (distance);
 }
 
 void	apply_inst(t_stk *a_stack, t_stk *b_stack, int inst)
 {
-	a_stack->tab[inst]((t_stk*[]){a_stack, b_stack});
+	a_stack->tab[inst]((t_stk *[]){a_stack, b_stack});
 }
 
 void	stack_move_x_steps(int index, int stk, t_stk **stacks, t_list **lst)
@@ -54,13 +51,14 @@ void	stack_move_x_steps(int index, int stk, t_stk **stacks, t_list **lst)
 	index = ft_abs(index);
 	while (index--)
 	{
-		add_node((void*)inst, lst);
+		add_node((void *)inst, lst);
 		apply_inst(stacks[A], stacks[B], inst);
 	}
 }
 
-void	apply_and_push(long inst, t_list **lst, t_stk *a, t_stk *b)
+int	apply_and_push(long inst, t_list **lst, t_stk *a, t_stk *b)
 {
-	a->tab[inst]((t_stk*[]){a, b});
-	add_node((void*)inst, lst);
+	a->tab[inst]((t_stk *[]){a, b});
+	add_node((void *)inst, lst);
+	return (1);
 }

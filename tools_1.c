@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:29:39 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/16 02:00:17 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/06 21:07:02 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*wrap_malloc(size_t bytes)
 	return (ret);
 }
 
-int		add_node(void *data, t_list **list)
+int	add_node(void *data, t_list **list)
 {
 	t_list	**tracer;
 

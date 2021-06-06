@@ -7,9 +7,15 @@ stack_tools_1.c \
 stack_tools_2.c \
 stack_tools_3.c \
 stack_tools_4.c \
+stack_tools_5.c \
 stack_tools_6.c \
 stack_tools_7.c \
 stack_tools_8.c \
+stack_tools_9.c \
+stack_tools_10.c \
+stack_tools_11.c \
+stack_tools_12.c \
+stack_tools_13.c \
 tools_0.c \
 tools_1.c \
 tools_2.c \
@@ -26,9 +32,11 @@ stack_tools_5.c \
 stack_tools_6.c \
 stack_tools_7.c \
 stack_tools_8.c \
-algo_0.c \
-algo_1.c \
-algo_2.c \
+stack_tools_9.c \
+stack_tools_10.c \
+stack_tools_11.c \
+stack_tools_12.c \
+stack_tools_13.c \
 tools_0.c \
 tools_1.c \
 tools_2.c \
@@ -40,6 +48,7 @@ CHECKER = checker
 PUSH_SWAP = push_swap
 GEN = gen
 WWW = -Wall -Wextra -Werror
+CC = ~/.brew/Cellar/llvm/12.0.0_1/bin/clang
 
 all: $(NAME)
 
@@ -62,6 +71,10 @@ re: fclean all
 san:
 	gcc $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g -fsanitize=address
 	gcc $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g -fsanitize=address
+
+leak:
+	$(CC) $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g -fsanitize=address
+	$(CC) $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g -fsanitize=address
 
 deb:
 	gcc $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g -DDEBUG

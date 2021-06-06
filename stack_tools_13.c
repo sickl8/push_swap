@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bruteforce_0.c                                     :+:      :+:    :+:   */
+/*   stack_tools_13.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/19 16:02:25 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/19 18:50:36 by isaadi           ###   ########.fr       */
+/*   Created: 2021/06/06 20:12:46 by isaadi            #+#    #+#             */
+/*   Updated: 2021/06/06 21:40:16 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-t_list	*bf_0(t_stk *a)
+void	rrotate_b(t_stk **stacks)
 {
-	t_list *ret;
+	stack_reverse_rotate(stacks[B]);
+}
 
-	ret = NULL;
-	int len = 0;
-	while (1)
+void	rrotate_r(t_stk **stacks)
+{
+	stack_reverse_rotate(stacks[A]);
+	stack_reverse_rotate(stacks[B]);
+}
+
+int	free_list(t_list *lst)
+{
+	t_list	*nxt;
+
+	while (lst)
 	{
-		int *tab;
-		
-		tab = wrap_malloc(sizeof(*tab) * (len + 1));
-		tab[len] = -1;
-		int i = -1;
-		while (i < len)
-		while (!end_tab(tab))
-		{
-			if (apply_inst(tab, stack_duplicate(a)))
-				return (export_tab(tab));
-			inc_tab(tab);
-		}
-		len++;
+		nxt = lst->next;
+		free(lst);
+		lst = nxt;
 	}
+	return (1);
 }

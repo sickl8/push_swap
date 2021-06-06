@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:42:15 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/05 17:02:54 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/06 20:05:12 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	stack_push_front(int data, t_stk *stack)
 
 t_clt	*stack_member_at(int index, t_stk *stack)
 {
-	t_stki itr;
+	t_stki	itr;
 
 	init_stack_iterator(&itr, stack);
 	while (!stack_iterator_end(&itr) && itr.index != index)

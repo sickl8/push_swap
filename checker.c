@@ -6,27 +6,19 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:24:14 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/15 19:17:28 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/06 21:37:00 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	exec(t_list *list, t_stk *a_stack, t_stk *b_stack)
+void	exec(t_list *list, t_stk *a_stack, t_stk *b_stack, t_list *itr)
 {
-	t_list *itr;
+	long	co;
 
 	itr = list;
-	#ifdef DEBUG
-	o_puts("\n");
-	double_stack_print(a_stack, b_stack);
-	o_puts("      - -\n");
-	o_puts("      a b\n");
-	o_puts("      -------------------------------\n");
-	#endif
 	while (itr)
 	{
-		// printf("list = |%s|\n", (char*)itr->data);
 		if (!ft_strcmp(itr->data, "sa") || !ft_strcmp(itr->data, "ss"))
 			stack_swap(a_stack);
 		if (!ft_strcmp(itr->data, "sb") || !ft_strcmp(itr->data, "ss"))
@@ -43,22 +35,13 @@ void	exec(t_list *list, t_stk *a_stack, t_stk *b_stack)
 			stack_push_from_b_to_a(a_stack, b_stack);
 		else if (!ft_strcmp(itr->data, "pb"))
 			stack_push_from_a_to_b(a_stack, b_stack);
-		#ifdef DEBUG
-		double_stack_print(a_stack, b_stack);
-		o_puts("      - -\n");
-		o_puts("      a b\n");
-		o_puts("      -------------------------------");
-		o_puts(itr->data);
-		o_puts("\n");
-		#endif
 		itr = itr->next;
 	}
-	o_puts(stack_is_sorted(a_stack) && stack_size(b_stack) == 0 ?
-	"OK\n" : "KO\n");
-	exit(0);
+	co = (stack_is_sorted(a_stack) && stack_size(b_stack) == 0);
+	exit(0 * o_puts((char *)(co * (long)"OK\n" + !co * (long)"KO\n")));
 }
 
-int		check_line_sanity(char *s)
+int	check_line_sanity(char *s)
 {
 	if (!ft_strcmp(s, "sa") || !ft_strcmp(s, "sb")
 		|| !ft_strcmp(s, "ss") || !ft_strcmp(s, "pa") || !ft_strcmp(s, "pb")
@@ -111,10 +94,10 @@ void	continue_main(t_stk *a_stack, t_stk *b_stack)
 	}
 	if (gret == -1)
 		error();
-	exec(make_list(buf), a_stack, b_stack);
+	exec(make_list(buf), a_stack, b_stack, NULL);
 }
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_stk	a_stack;
 	t_stk	b_stack;

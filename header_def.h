@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:27:44 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/09 22:57:38 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/06 19:56:52 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@
 # define A 0
 # define B 1
 
-#define PV(x, y) printf("%s = " y, #x, x)
-#define EPV(x, y) fprintf(stderr, "%s = " y, #x, x)
-#define HERE printf("here?: %s:%d\n", __FILE__, __LINE__)
-#define ITERATE_ON_STACK(x, y) for (t_stki y = init_stack_iterator(&y, x); !stack_iterator_end(&y); stack_iterator_advance(&y))
-#define MALLOC(x, y) (x = malloc(sizeof(*(x)) * (y)))
+// #define PV(x, y) printf("%s = " y, #x, x)
+// #define EPV(x, y) fprintf(stderr, "%s = " y, #x, x)
+// #define HERE printf("here?: %s:%d\n", __FILE__, __LINE__)
+// #define MALLOC(x, y) (x = malloc(sizeof(*(x)) * (y)))
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sickl8 <sickl8@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 19:26:32 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/06 00:51:12 by sickl8           ###   ########.fr       */
+/*   Updated: 2021/06/06 21:22:49 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char a;
-	char *z;
+	char	a;
+	char	*z;
 
-	z = (char*)s;
+	z = (char *)s;
 	a = (char)c;
 	while (*z)
 	{
@@ -30,11 +30,11 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-void	ft_putnbr(int n)
+int	ft_putnbr(long n)
 {
-	long nb;
-	long p;
-	char c;
+	long	nb;
+	long	p;
+	char	c;
 
 	nb = (long)n;
 	p = 1;
@@ -51,9 +51,10 @@ void	ft_putnbr(int n)
 		write(1, &c, 1);
 		p /= 10;
 	}
+	return (1);
 }
 
-int		check_sanity(char *s)
+int	check_sanity(char *s)
 {
 	int	i;
 	int	sign;
@@ -66,29 +67,32 @@ int		check_sanity(char *s)
 		return (1);
 	if (ft_strlen(s) > 10 + (s[0] == '-'))
 		return (1);
-	if (ft_strlen(s + (s[0] == '-')) == 10 &&
-		((sign == 1 && ft_strcmp(s, "2147483647") > 0)
-		|| (sign == -1 && ft_strcmp(s + 1, "2147483648") > 0)))
+	if (ft_strlen(s + (s[0] == '-')) == 10
+		&& ((sign == 1 && ft_strcmp(s, "2147483647") > 0)
+			|| (sign == -1 && ft_strcmp(s + 1, "2147483648") > 0)))
 		return (1);
 	s += (s[0] == '-');
 	while (s[++i])
 		if (!ft_isdigit(s[i]))
-			return (1 + 0 * HERE);
+			return (1);
 	return (0);
 }
 
-void	print_instructions(t_list *instructions)
+int	print_instructions(t_list *instructions, char sep)
 {
-	char **cor;
-	
-	cor = (char*[])
+	char	**cor;
+
+	cor = (char *[])
 	{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
 	while (instructions)
 	{
 		o_puts(cor[(long)instructions->data]);
-		o_puts("\n");
+		o_puts((char []){sep, '\0'});
 		instructions = instructions->next;
 	}
+	if (sep != '\n')
+		o_puts("\n");
+	return (1);
 }
 
 void	print_instructions_s(t_list *instructions)

@@ -6,13 +6,13 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:51:10 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/05 12:38:05 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/06 20:09:23 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int		stack_is_sorted(t_stk *stack)
+int	stack_is_sorted(t_stk *stack)
 {
 	t_stki	itr;
 	long	data;
@@ -37,9 +37,10 @@ void	stack_print(t_stk *stack, char sep)
 	while (!stack_iterator_end(&itr))
 	{
 		ft_putnbr(itr.ptr->data);
-		o_puts((char[]){sep, '\0'});
-		stack_iterator_advance(&itr);	
+		o_puts((char []){sep, '\0'});
+		stack_iterator_advance(&itr);
 	}
+	o_puts("\n");
 }
 
 void	double_stack_print(t_stk *a_stack, t_stk *b_stack)
@@ -55,16 +56,16 @@ void	double_stack_print(t_stk *a_stack, t_stk *b_stack)
 		{
 			o_puts("      ");
 			ft_putnbr(a_itr.ptr->data);
-			stack_iterator_advance(&a_itr);	
+			stack_iterator_advance(&a_itr);
 		}
 		else if (stack_iterator_end(&b_itr))
 			break ;
-		if (!stack_iterator_end(&b_itr) &&
-		a_itr.stk->length - a_itr.index < b_itr.stk->length)
+		if (!stack_iterator_end(&b_itr)
+			&& a_itr.stk->length - a_itr.index < b_itr.stk->length)
 		{
 			o_puts("\t");
 			ft_putnbr(b_itr.ptr->data);
-			stack_iterator_advance(&b_itr);	
+			stack_iterator_advance(&b_itr);
 		}
 		o_puts("\n");
 	}

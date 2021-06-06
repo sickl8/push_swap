@@ -6,32 +6,11 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 17:02:25 by isaadi            #+#    #+#             */
-/*   Updated: 2021/05/19 17:46:36 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/06 20:12:30 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-void	swap_a(t_stk **stacks)
-{
-	stack_swap(stacks[A]);
-}
-
-void	swap_b(t_stk **stacks)
-{
-	stack_swap(stacks[B]);
-}
-
-void	swap_s(t_stk **stacks)
-{
-	swap_a(stacks);
-	swap_b(stacks);
-}
-
-void	push_a(t_stk **stacks)
-{
-	stack_push_from_b_to_a(stacks[A], stacks[B]);
-}
 
 void	push_b(t_stk **stacks)
 {
@@ -57,15 +36,4 @@ void	rotate_r(t_stk **stacks)
 void	rrotate_a(t_stk **stacks)
 {
 	stack_reverse_rotate(stacks[A]);
-}
-
-void	rrotate_b(t_stk **stacks)
-{
-	stack_reverse_rotate(stacks[B]);
-}
-
-void	rrotate_r(t_stk **stacks)
-{
-	stack_reverse_rotate(stacks[A]);
-	stack_reverse_rotate(stacks[B]);
 }

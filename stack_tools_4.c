@@ -6,27 +6,27 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:43:48 by isaadi            #+#    #+#             */
-/*   Updated: 2021/03/18 21:49:00 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/06 20:09:44 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int		stack_member_index_p(t_clt *member, t_stk *stack)
+int	stack_member_index_p(t_clt *member, t_stk *stack)
 {
 	return (stack_member_index(member->data, stack));
 }
 
-int		stack_member_index(int data, t_stk *stack)
+int	stack_member_index(int data, t_stk *stack)
 {
-	t_stki	itr;
+	t_itr	itr;
 
-	init_stack_iterator(&itr, stack);
-	while (!stack_iterator_end(&itr))
+	init_stack_iterator(itr, stack);
+	while (!stack_iterator_end(itr))
 	{
-		if (itr.ptr->data == data)
-			return (itr.index);
-		stack_iterator_advance(&itr);
+		if (itr->ptr->data == data)
+			return (itr->index);
+		stack_iterator_advance(itr);
 	}
 	return (-1);
 }
@@ -63,7 +63,7 @@ t_clt	*biggest_member(t_stk *stack)
 	return (ret);
 }
 
-int		stack_reach_closest_member(int m1, int m2, t_stk *stack, t_list **inst)
+int	stack_reach_closest_member(int m1, int m2, t_stk *stack, t_list **inst)
 {
 	int		len1;
 	int		len2;
