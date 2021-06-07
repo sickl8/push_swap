@@ -52,10 +52,8 @@ CC = ~/.brew/Cellar/llvm/12.0.0_1/bin/clang
 
 all: $(NAME)
 
-$(NAME): $(CHECKER) $(PUSH_SWAP) $(GEN)
+$(NAME): $(PUSH_SWAP) $(GEN)
 
-$(CHECKER):
-	gcc $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g
 
 $(PUSH_SWAP):
 	gcc $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g
@@ -68,26 +66,16 @@ fclean: clean
 
 re: fclean all
 
+gen:
+	gcc cc.c -o $(GEN) tools_0.c
+
+$(CHECKER):
+	gcc $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g
+
+bonus: $(CHECKER)
+
 san:
 	gcc $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g -fsanitize=address
 	gcc $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g -fsanitize=address
 
-leak:
-	$(CC) $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g -fsanitize=address
-	$(CC) $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g -fsanitize=address
-
-deb:
-	gcc $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g -DDEBUG
-	gcc $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g -DDEBUG
-
-sdeb:
-	gcc $(WWW) $(CHECKER_SRC) -o $(CHECKER) -g -fsanitize=address -DDEBUG
-	gcc $(WWW) $(PUSH_SWAP_SRC) -o $(PUSH_SWAP) -g -fsanitize=address -DDEBUG
-
-gen:
-	gcc cc.c *tools*.c -o gen -lm -g
-
-test0:
-	./gen 5 0 > 1; cat 1; bash -c "./push_swap $$(cat 1)"
-
-.PHONY: all $(NAME) clean fclean re deb san
+.PHONY: all $(NAME) clean fclean re san
