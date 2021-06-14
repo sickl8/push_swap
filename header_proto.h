@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 16:40:52 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/06 21:39:26 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/14 19:01:08 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		stack_is_kinda_sorted(t_stk *stack);
 int		stack_score(t_stk *stack);
 t_list	*algo_4(t_stk *a_stk, t_stk *b_stk);
 int		*to_tab(t_stk *stack);
-void	stack_destroy(t_stk *stack, int fp);
+int		stack_destroy(t_stk *stack, int fp);
 void	swap_a(t_stk **stacks);
 void	swap_b(t_stk **stacks);
 void	swap_s(t_stk **stacks);
@@ -108,5 +108,6 @@ void	brute_force(t_stk *a_stack, t_stk *b_stack, char **g_cor);
 int		apply_inst_lst(t_stk *a_stack, t_stk *b_stack, int *inst, int len);
 void	*as(void *a, long v, int size);
 int		free_list(t_list *lst);
+void	sorted(t_stk *a_stack);
 
 #endif

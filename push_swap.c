@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:56:24 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/06 21:39:49 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/14 19:01:25 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void	algoo(t_stk *a, t_stk *b, t_list *st, long max)
 	while (--max > -1)
 		stack_reach_member(max, B, b, &st) && apply_and_push(PA, &st, a, b);
 	print_instructions(st, '\n') && free_list(st);
-	stack_destroy(a, TRUE);
-	stack_destroy(b, TRUE);
+	stack_destroy(a, TRUE) && stack_destroy(b, TRUE);
 }
 
 void	to_indexes(t_stk *a)
@@ -96,9 +95,10 @@ int	main(int ac, char **av)
 	to_indexes(&a_stack);
 	if (a_stack.length < 7)
 		continue_main(stack_duplicate(&a_stack), stack_duplicate(&b_stack));
-	else
+	else if (!stack_is_kinda_sorted(&a_stack))
 		algoo(stack_duplicate(&a_stack),
 			stack_duplicate(&b_stack), NULL, a_stack.length);
-	stack_destroy(&a_stack, FALSE);
-	stack_destroy(&b_stack, FALSE);
+	else
+		sorted(stack_duplicate(&a_stack));
+	stack_destroy(&a_stack, FALSE) && stack_destroy(&b_stack, FALSE);
 }

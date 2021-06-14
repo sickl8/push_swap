@@ -6,7 +6,7 @@
 /*   By: isaadi <isaadi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 02:47:37 by isaadi            #+#    #+#             */
-/*   Updated: 2021/06/06 21:18:42 by isaadi           ###   ########.fr       */
+/*   Updated: 2021/06/14 18:56:38 by isaadi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 int	stack_is_kinda_sorted(t_stk *stack)
 {
-	int		smallest;
 	t_clt	*bk_anchor;
 	int		ret;
 
-	smallest = smallest_member(stack)->data;
 	bk_anchor = stack->anchor;
-	stack->anchor = stack_member(smallest, stack);
+	stack->anchor = stack_member(0, stack);
 	ret = stack_is_sorted(stack);
 	stack->anchor = bk_anchor;
 	return (ret);
@@ -87,10 +85,11 @@ int	*to_tab(t_stk *stack)
 	return (ret);
 }
 
-void	stack_destroy(t_stk *stack, int free_p)
+int	stack_destroy(t_stk *stack, int free_p)
 {
 	while (stack->length)
 		stack_erase(stack->anchor, stack);
 	if (free_p)
 		free(stack);
+	return (1);
 }
